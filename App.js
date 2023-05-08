@@ -1,5 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from '@react-navigation/native';
+import Login from './screens/Login';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +31,6 @@ export default function App() {
               }
             })}
           >
-            <Tab.Screen name="StateHandler" children={ () => <StateHandler /> } />
             <Tab.Screen name="Login" children={ () => <Login /> } />
             <Tab.Screen name="Flexbox" children={ () => <Flexbox /> } />
             <Tab.Screen name="Register" children={ () => <Register /> } />
