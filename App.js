@@ -3,6 +3,11 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
 import Login from './screens/Login';
+import Home from './screens/Home';
+import Equipmentsbrowser from './screens/Equipmentsbrowser';
+import Profile from './screens/Profile';
+
+import AntIcon from 'react-native-vector-icons/AntDesign';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,9 +36,9 @@ export default function App() {
               }
             })}
           >
-            <Tab.Screen name="Login" children={ () => <Login /> } />
-            <Tab.Screen name="Flexbox" children={ () => <Flexbox /> } />
-            <Tab.Screen name="Register" children={ () => <Register /> } />
+            <Tab.Screen name="Home" children={ () => <Home /> } />
+            <Tab.Screen name="Browser" children={ () => <Equipmentsbrowser /> } />
+            <Tab.Screen name="Profile" children={ () => <Profile /> } />
           </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaView>
