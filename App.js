@@ -8,6 +8,7 @@ import Equipmentsbrowser from './screens/Equipmentsbrowser';
 import Profile from './screens/Profile';
 
 import AntIcon from 'react-native-vector-icons/AntDesign';
+import IonicIcon from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,19 +21,19 @@ export default function App() {
               tabBarIcon: ({ focused, size }) => {
                 let iconName;
                 let color;
-                color = focused ? 'red' : 'black';
+                color = focused ? 'gray' : 'black';
                 size = focused ? 32 : 24;
-                if(route.name === 'StateHandler'){
-                  iconName = 'dingding';
-                }else if(route.name === 'Login'){
-                  iconName = 'form';
+                if(route.name === 'Home'){
+                  iconName = focused ? 'home' : 'home-outline';
+                }else if(route.name === 'Browser'){
+                  iconName = focused ? 'cart-sharp' :'cart-outline' ;
                 }else if(route.name === 'Flexbox'){
                   iconName = focused ? 'dribbble' : 'dribbble-square';
                 }else if(route.name === 'Register'){
                   iconName = 'user';
                 }
 
-                return <AntIcon name={iconName} size={size} color={color} />;
+                return <IonicIcon name={iconName} size={size} color={color} />;
               }
             })}
           >
