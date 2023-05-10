@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import {
   AppRegistry,
   Button,
+  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
@@ -10,11 +11,12 @@ import {
 } from "react-native";
 // import { initializeApp } from "firebase/app";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import FontIcon from 'react-native-vector-icons/FontAwesome';
+import AntIcon from 'react-native-vector-icons/AntDesign';
 import Home from "./screens/Home";
 import Login from "./screens/Login";
 import Profile from "./screens/Profile";
 import { UserProvider } from "./context/UserContext";
+import Equipmentsbrowser from "./screens/Equipmentsbrowser";
 
 
 export default function App() {
