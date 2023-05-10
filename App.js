@@ -20,43 +20,35 @@ import { UserProvider } from "./context/UserContext";
 export default function App() {
   const Tab = createBottomTabNavigator();
   return (
-    <UserProvider>
-    <NavigationContainer style={styles.container} >
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-            size = focused ? 25 : 20;
-            if (route.name === "Profile") {
-              iconName = focused ? "user-circle" : "user-circle-o";
-            } else if (route.name === "ListPost") {
-              iconName = focused ? "list-alt" : "list-alt";
-            } else if (route.name === "AddPost") {
-              iconName = focused ? "address-book" : "address-book-o";
-            }else if (route.name === "ListPost") {
-              iconName = focused ? "post" : "post-outline";
-            }
-    
-            // You can return any component that you like here!
-            return <FontIcon name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: "blue",
-          tabBarInactiveTintColor: "gray",
-        })}
-      >
-        <Tab.Screen name="Profile" children={()=><Profile/>} />
-        <Tab.Screen name="Home" children={()=><Home />} />
-        <Tab.Screen name="Login" children={()=><Login />} />
-      </Tab.Navigator>
-    </NavigationContainer>
-     {/* <View style={styles.container}>
-       <StatusBar style="light" />
-       <Todo />
-       <AddContact app={app} />
-       <ListContact app={app} />
-       <Register app={app} visible={true} setVisible={() => {}} />
-     </View> */}
-    </UserProvider>
+    <SafeAreaView style={{ flex: 1 }}>
+      <NavigationContainer>
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ focused, size }) => {
+                let iconName;
+                let color;
+                color = focused ? 'red' : 'black';
+                size = focused ? 32 : 24;
+                if(route.name === 'StateHandler'){
+                  iconName = 'dingding';
+                }else if(route.name === 'Login'){
+                  iconName = 'form';
+                }else if(route.name === 'Flexbox'){
+                  iconName = focused ? 'dribbble' : 'dribbble-square';
+                }else if(route.name === 'Register'){
+                  iconName = 'user';
+                }
+
+                return <AntIcon name={iconName} size={size} color={color} />;
+              }
+            })}
+          >
+            <Tab.Screen name="Home" children={ () => <Home /> } />
+            <Tab.Screen name="Browser" children={ () => <Equipmentsbrowser /> } />
+            <Tab.Screen name="Profile" children={ () => <Profile /> } />
+          </Tab.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
   );
 }
 
