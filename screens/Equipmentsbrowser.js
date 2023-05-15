@@ -18,7 +18,7 @@ const Equipmentsbrowser = () => {
         id: doc.id,
         obj: doc.data(),
       }));
-      // console.log(data[0].obj.name);
+     console.log(data);
       setEquipmentList(data);
       setLoading(false);
     });
