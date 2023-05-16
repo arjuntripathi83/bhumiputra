@@ -75,6 +75,6 @@
       },
     });
     
-    export default ProductDetailsPage;
+    export default EquipmentsDetails;
 
 
