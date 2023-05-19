@@ -42,7 +42,7 @@ const Equipmentsbrowser = () => {
               source={{ uri: item.obj.Image }}
               style={styles.productImage}
             />
-            <Text>{item.obj.Name}</Text>
+            <Text>{item.obj.Title}</Text>
             <Text>{item.obj.Price}</Text>
             <Text>{item.obj.Description}</Text>
             <Button onPress={(e) => {

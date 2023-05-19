@@ -17,7 +17,7 @@ const EquipmentsDetails = ({ equipmentData, visible, setVisible }) => {
           resizeMode="cover"
         />
         <View style={styles.productDetails}>
-          <Text style={styles.productTitle}>{equipmentData.obj.Name}</Text>
+          <Text style={styles.productTitle}>{equipmentData.obj.Title}</Text>
           <Text style={styles.productPrice}>{equipmentData.obj.Price}</Text>
           <Text style={styles.productDescription}>
             For Quick Decomposition Of Organic Waste Into Compost, Bio
