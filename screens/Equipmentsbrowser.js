@@ -1,69 +1,87 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 import equipmentData from "./equipmentList";
-import { Card } from "react-native-paper";
-
-// import { collection, getDocs, getFirestore } from "firebase/firestore";
-// import app from "../firebaseconfig";
+import app from "../firebaseConfig";
+import { Button } from "react-native-paper";
+import EquipmentsDetails from "./EquipmentsDetails";
 
 const Equipmentsbrowser = () => {
   const [equipmentList, setEquipmentList] = useState([equipmentData]);
   const [loading, setLoading] = useState(false);
 
-  // const fetchEquipmentData = () => {
-  //   setLoading(true);
-  //   const db = getFirestore(app);
-  //   const ref = collection(db, "equipment");
-  //   getDocs(ref).then((snapshot) => {
-  //     const data = snapshot.docs.map((doc) => ({
-  //       id: doc.id,
-  //       obj: doc.data(),
-  //     }));
-  //     // console.log(data[0].obj.name);
-  //     setEquipmentList(data);
-  //     setLoading(false);
-  //   });
-  // };
+  const [selEquipment, setSelEquipment] = useState(null);
+
+  const [viewModal, setViewModal] = useState(false);
+
+  const fetchEquipmentData = () => {
+    setLoading(true);
+    const db = getFirestore(app);
+    const ref = collection(db, "Equipments");
+    getDocs(ref).then((snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        obj: doc.data(),
+      }));
+      console.log(data);
+      setEquipmentList(data);
+      setLoading(false);
+    });
+  };
 
   useEffect(() => {
     fetchEquipmentData();
   }, []);
 
-  const ProductCard = ({ product }) => {
-    console.log(product);
-    return (
-      <Card>
-        <Card.Title>{product.name}</Card.Title>
-        <Card.Divider />
-        <Image source={{ uri: product.image }} style={styles.image} />
-        <Text>{product.description}</Text>
-        <Text>{product.price}</Text>
-      </Card>
-    );
-  };
-
-  const ProductList = () => {
+  const showProducts = () => {
     return (
       <View>
-        <FlatList
-          data={equipmentList}
-          renderItem={({ item }) => <ProductCard product={item} />}
-          keyExtractor={(item) => item.id}
-        />
+        {equipmentList.map((item) => (
+          <View style={styles.productContainer}>
+            <Image
+              source={{ uri: item.obj.Image }}
+              style={styles.productImage}
+            />
+            <Text>{item.obj.Name}</Text>
+            <Text>{item.obj.Price}</Text>
+            <Text>{item.obj.Description}</Text>
+            <Button onPress={(e) => setSelEquipment(item)}>View More</Button>
+          </View>
+        ))}
       </View>
     );
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.header}></View>
-      <View>{loading ? <Text>Loading...</Text> : <ProductList /> } </View>
+      <ScrollView>{showProducts()}</ScrollView>
+      {selMenu && (
+        <EquipmentsDetails
+          equipmentData={equipmentData}
+          app={app}
+          visible={viewModal}
+          setVisible={setViewModal}
+        />
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
   header: {},
+  productImage: {
+    width: "100%",
+    height: 300,
+    borderRadius: 20,
+  },
+  productContainer: {
+    marginBottom: 40,
+  },
 });
 
 export default Equipmentsbrowser;

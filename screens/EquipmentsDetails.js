@@ -1,11 +1,17 @@
- import React from 'react';
+ import React, { useState } from 'react';
     import { View, Text, Image, StyleSheet } from 'react-native';
     
-    const EquipmentsDetails = () => {
+    const EquipmentsDetails = ({equipmentData, visible, setVisible}) => {
+
       return (
+        <Modal
+      visible={visible}
+      onRequestClose={(e) => setVisible(false)}
+      animationType="slide"
+    >
         <View style={styles.container}>
           <Image
-            source={require('https://cdn.shopify.com/s/files/1/0755/5416/0953/files/5H0A0707-scaled-1.jpg?v=1683283403')}
+            source={require('https://firebasestorage.googleapis.com/v0/b/bhumiputra-ed2ee.appspot.com/o/Equipments%2Ftransplanters%20jd.jpg?alt=media&token=5a8a31d0-0403-4d85-87ed-c1e6776d663d')}
             style={styles.productImage}
             resizeMode="cover"
           />
@@ -24,6 +30,7 @@
             <Text style={styles.addToCartButtonText}>Add to Cart</Text>
           </View>
         </View>
+        </Modal>
       );
     };
     
