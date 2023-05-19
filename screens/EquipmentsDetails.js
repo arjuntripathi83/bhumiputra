@@ -11,14 +11,14 @@ const EquipmentsDetails = ({ equipmentData, visible, setVisible }) => {
       <View style={styles.container}>
         <Image
           source={{
-            uri: "https://firebasestorage.googleapis.com/v0/b/bhumiputra-ed2ee.appspot.com/o/Equipments%2Ftransplanters%20jd.jpg?alt=media&token=5a8a31d0-0403-4d85-87ed-c1e6776d663d",
+            uri: equipmentData.obj.Image,
           }}
           style={styles.productImage}
           resizeMode="cover"
         />
         <View style={styles.productDetails}>
-          <Text style={styles.productTitle}>Utkarsh Agro-Composter</Text>
-          <Text style={styles.productPrice}>Rs328</Text>
+          <Text style={styles.productTitle}>{equipmentData.obj.Name}</Text>
+          <Text style={styles.productPrice}>{equipmentData.obj.Price}</Text>
           <Text style={styles.productDescription}>
             For Quick Decomposition Of Organic Waste Into Compost, Bio
             Fertilizers

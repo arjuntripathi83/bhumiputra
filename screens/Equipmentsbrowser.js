@@ -60,7 +60,7 @@ const Equipmentsbrowser = () => {
       <ScrollView>{showProducts()}</ScrollView>
       {selEquipment && (
         <EquipmentsDetails
-          equipmentData={equipmentData}
+        equipmentData={selEquipment}
           app={app}
           visible={viewModal}
           setVisible={setViewModal}
