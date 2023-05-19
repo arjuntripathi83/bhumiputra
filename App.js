@@ -12,11 +12,7 @@ import {
 // import { initializeApp } from "firebase/app";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AntIcon from 'react-native-vector-icons/AntDesign';
-import Home from "./screens/Home";
-import Login from "./screens/Login";
-import Profile from "./screens/Profile";
-import { UserProvider } from "./context/UserContext";
-import Equipmentsbrowser from "./screens/Equipmentsbrowser";
+import IonicIcon from 'react-native-vector-icons/Ionicons';
 
 
 export default function App() {
@@ -29,19 +25,19 @@ export default function App() {
               tabBarIcon: ({ focused, size }) => {
                 let iconName;
                 let color;
-                color = focused ? 'red' : 'black';
+                color = focused ? 'gray' : 'black';
                 size = focused ? 32 : 24;
-                if(route.name === 'StateHandler'){
-                  iconName = 'dingding';
-                }else if(route.name === 'Login'){
-                  iconName = 'form';
+                if(route.name === 'Home'){
+                  iconName = focused ? 'home' : 'home-outline';
+                }else if(route.name === 'Browser'){
+                  iconName = focused ? 'cart-sharp' :'cart-outline' ;
                 }else if(route.name === 'Flexbox'){
                   iconName = focused ? 'dribbble' : 'dribbble-square';
                 }else if(route.name === 'Register'){
                   iconName = 'user';
                 }
 
-                return <AntIcon name={iconName} size={size} color={color} />;
+                return <IonicIcon name={iconName} size={size} color={color} />;
               }
             })}
           >
