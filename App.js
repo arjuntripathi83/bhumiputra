@@ -13,6 +13,9 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import IonicIcon from 'react-native-vector-icons/Ionicons';
+import Home from "./screens/Home";
+import Equipmentsbrowser from "./screens/Equipmentsbrowser";
+import Profile from "./screens/Profile";
 
 
 export default function App() {

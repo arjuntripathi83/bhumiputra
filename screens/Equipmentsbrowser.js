@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import equipmentData from "./equipmentList";
+import { Card } from "react-native-paper";
 
 // import { collection, getDocs, getFirestore } from "firebase/firestore";
 // import app from "../firebaseconfig";
@@ -29,6 +30,7 @@ const Equipmentsbrowser = () => {
   }, []);
 
   const ProductCard = ({ product }) => {
+    console.log(product);
     return (
       <Card>
         <Card.Title>{product.name}</Card.Title>
@@ -40,13 +42,13 @@ const Equipmentsbrowser = () => {
     );
   };
 
-  const ProductsList = () => {
+  const ProductList = () => {
     return (
       <View>
         <FlatList
-          data={productsData}
+          data={equipmentList}
           renderItem={({ item }) => <ProductCard product={item} />}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item) => item.id}
         />
       </View>
     );
@@ -55,7 +57,7 @@ const Equipmentsbrowser = () => {
   return (
     <View>
       <View style={styles.header}></View>
-      <View>{loading ? <Text>Loading...</Text> : <ProductsList />}</View>
+      <View>{loading ? <Text>Loading...</Text> : <ProductList /> } </View>
     </View>
   );
 };
