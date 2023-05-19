@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import equipmentData from "./equipmentList";
 import app from "../firebaseConfig";
@@ -7,7 +7,7 @@ import { Button } from "react-native-paper";
 import EquipmentsDetails from "./EquipmentsDetails";
 
 const Equipmentsbrowser = () => {
-  const [equipmentList, setEquipmentList] = useState([equipmentData]);
+  const [equipmentList, setEquipmentList] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const [selEquipment, setSelEquipment] = useState(null);
@@ -45,7 +45,9 @@ const Equipmentsbrowser = () => {
             <Text>{item.obj.Name}</Text>
             <Text>{item.obj.Price}</Text>
             <Text>{item.obj.Description}</Text>
-            <Button onPress={(e) => setSelEquipment(item)}>View More</Button>
+            <Button onPress={(e) => {
+              setViewModal(true);
+              setSelEquipment(item)}}>View More</Button>
           </View>
         ))}
       </View>
@@ -56,7 +58,7 @@ const Equipmentsbrowser = () => {
     <View style={styles.container}>
       <View style={styles.header}></View>
       <ScrollView>{showProducts()}</ScrollView>
-      {selMenu && (
+      {selEquipment && (
         <EquipmentsDetails
           equipmentData={equipmentData}
           app={app}
