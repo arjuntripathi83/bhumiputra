@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, Modal } from "react-native";
-import { Rating, productRating } from 'react-native-ratings';
+import { IconButton } from "react-native-paper";
+import { Rating, productRating } from "react-native-ratings";
 const EquipmentsDetails = ({ equipmentData, visible, setVisible }) => {
   return (
     <Modal
@@ -9,31 +10,48 @@ const EquipmentsDetails = ({ equipmentData, visible, setVisible }) => {
       animationType="slide"
     >
       <View style={styles.container}>
-      <View style={styles.whishlistButton}>
-          <Text style={styles.whishlistButton}></Text>
+        <View>
+          <Image
+            source={{
+              uri: equipmentData.obj.Image,
+            }}
+            style={styles.productImage}
+            resizeMode="cover"
+          />
+          <View
+            style={{
+              position: "absolute",
+              right: 10,
+              top: 10,
+              backgroundColor: "transparent",
+            }}
+          >
+            <IconButton
+              icon="heart"
+              iconColor="red"
+              size={20}
+              onPress={() => console.log("Pressed")}
+            />
+          </View>
         </View>
-        <Image
-          source={{
-            uri: equipmentData.obj.Image,
-          }}
-          style={styles.productImage}
-          resizeMode="cover"
-        />
         <View style={styles.productDetails}>
-        <Text style={styles.productBrand}>{equipmentData.obj.Brand}</Text>
+          <Text style={styles.productBrand}>{equipmentData.obj.Brand}</Text>
           <Text style={styles.productTitle}>{equipmentData.obj.Title}</Text>
           <Text style={styles.productPrice}>{equipmentData.obj.Price}</Text>
-          <Text style={styles.productDescription}>{equipmentData.obj.Description}</Text>
-          <Text style={styles.productRating}>count={11}
-  reviews={["Terrible", "Bad", "Good", "Very Good","Excelent"]}
-  defaultRating={11}
-  size={20}
-  <Rating
-  showRating
-  onFinishRating={this.ratingCompleted}
-  style={{ paddingVertical: 10 }}
-/>
-</Text>
+          <Text style={styles.productDescription}>
+            {equipmentData.obj.Description}
+          </Text>
+          <Text style={styles.productRating}>
+            count={11}
+            reviews={["Terrible", "Bad", "Good", "Very Good", "Excelent"]}
+            defaultRating={11}
+            size={20}
+            <Rating
+              showRating
+              onFinishRating={this.ratingCompleted}
+              style={{ paddingVertical: 10 }}
+            />
+          </Text>
 
           <Text style={styles.productReviews}>Reviews: 1234</Text>
           <Text style={styles.productAvailability}>In Stock</Text>
@@ -77,7 +95,6 @@ const styles = StyleSheet.create({
   },
   productRating: {
     marginBottom: 4,
-    
   },
   productReviews: {
     marginBottom: 4,
@@ -115,8 +132,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   ratingCompleted(rating) {
-    console.log("Rating is: " + rating)
-  }
+    console.log("Rating is: " + rating);
+  },
 });
 
 export default EquipmentsDetails;

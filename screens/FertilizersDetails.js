@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Image, StyleSheet, Modal } from "react-native";
-import { Rating, AirbnbRating } from 'react-native-elements';
+import { Rating, AirbnbRating } from "react-native-elements";
 
 const FertilizersDetails = ({ fertilizerData, visible, setVisible }) => {
   return (
@@ -10,13 +10,25 @@ const FertilizersDetails = ({ fertilizerData, visible, setVisible }) => {
       animationType="slide"
     >
       <View style={styles.container}>
-        <Image
-          source={{
-            uri: fertilizerData.obj.Image,
-          }}
-          style={styles.productImage}
-          resizeMode="cover"
-        />
+        <View>
+          <Image
+            source={{
+              uri: fertilizerData.obj.Image,
+            }}
+            style={styles.productImage}
+            resizeMode="cover"
+          />
+          <View
+            style={{
+              position: "absolute",
+              right: 5,
+              top: 5,
+              backgroundColor: "transparent",
+            }}
+          >
+            <Text style={{ color: "white" }}>X</Text>
+          </View>
+        </View>
         <View style={styles.productDetails}>
           <Text style={styles.productTitle}>{fertilizerData.obj.Title}</Text>
           <Text style={styles.productPrice}>{fertilizerData.obj.Price}</Text>
@@ -84,8 +96,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   ratingCompleted(rating) {
-    console.log("Rating is: " + rating)
-  }
+    console.log("Rating is: " + rating);
+  },
 });
 
-export default  FertilizersDetails;
+export default FertilizersDetails;
