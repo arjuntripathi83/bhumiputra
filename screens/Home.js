@@ -28,7 +28,7 @@ const Home = () => {
   );
 };
 
-  render() {
+  render() 
     return (
       <View>
         <Carousel
@@ -39,8 +39,8 @@ const Home = () => {
         />
       </View>
     );
-  }
-}
+  
+
 
 export default CarouselExample;
 
