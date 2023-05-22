@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import equipmentData from "./equipmentList";
 import app from "../firebaseConfig";
-
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { Button } from "react-native-paper";
+import EquipmentsDetails from "./EquipmentsDetails";
 
 const Equipmentsbrowser = () => {
-
   const [equipmentList, setEquipmentList] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const [selEquipment, setSelEquipment] = useState(null);
+
+  const [viewModal, setViewModal] = useState(false);
 
   const fetchEquipmentData = () => {
     setLoading(true);
     const db = getFirestore(app);
-    const ref = collection(db, "equipment");
+    const ref = collection(db, "Equipments");
     getDocs(ref).then((snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         id: doc.id,
         obj: doc.data(),
       }));
-     console.log(data);
+      console.log(data);
       setEquipmentList(data);
       setLoading(false);
     });
@@ -26,62 +31,59 @@ const Equipmentsbrowser = () => {
 
   useEffect(() => {
     fetchEquipmentData();
-  }, [])
-  
+  }, []);
 
-  const productsData = [
-    {
-      id: 1,
-      name: 'Product 1',
-      description: 'This is product 1',
-      image: 'https://picsum.photos/200',
-      price: '$10.00',
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      description: 'This is product 2',
-      image: 'https://picsum.photos/200',
-      price: '$15.00',
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      description: 'This is product 3',
-      image: 'https://picsum.photos/200',
-      price: '$20.00',
-    },
-  ];
-  
-  const ProductCard = ({ product }) => {
-    return (
-      <Card>
-        <Card.Title>{product.name}</Card.Title>
-        <Card.Divider />
-        <Image source={{ uri: product.image }} style={styles.image} />
-        <Text>{product.description}</Text>
-        <Text>{product.price}</Text>
-      </Card>
-    );
-  };
-  
-  const ProductsList = () => {
+  const showProducts = () => {
     return (
       <View>
-        <FlatList
-          data={productsData}
-          renderItem={({ item }) => <ProductCard product={item} />}
-          keyExtractor={(item) => item.id.toString()}
-        />
+        {equipmentList.map((item) => (
+          <View style={styles.productContainer}>
+            <Image
+              source={{ uri: item.obj.Image }}
+              style={styles.productImage}
+            />
+            <Text>{item.obj.Title}</Text>
+            <Text>{item.obj.Price}</Text>
+            <Text>{item.obj.Description}</Text>
+            <Button onPress={(e) => {
+              setViewModal(true);
+              setSelEquipment(item)}}>View More</Button>
+          </View>
+        ))}
       </View>
     );
   };
 
   return (
-    <View>
-      <Text>Equipmentsbrowser</Text>
+    <View style={styles.container}>
+      <View style={styles.header}></View>
+      <ScrollView>{showProducts()}</ScrollView>
+      {selEquipment && (
+        <EquipmentsDetails
+        equipmentData={selEquipment}
+          app={app}
+          visible={viewModal}
+          setVisible={setViewModal}
+        />
+      )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  header: {},
+  productImage: {
+    width: "100%",
+    height: 300,
+    borderRadius: 20,
+  },
+  productContainer: {
+    marginBottom: 40,
+  },
+});
 
 export default Equipmentsbrowser;

@@ -1,12 +1,22 @@
-import React from "react";
-import { Text, View } from "react-native";
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
 const Profile = () => {
   return (
-    <View>
-      <Text>Profile</Text>
+    <View style={styles.container}>
+        <Text style={styles.pageTitle}></Text>
     </View>
-  );
-};
+  )
+}
+
+const styles = StyleSheet.create({
+    pageTitle : {
+        fontSize : 30,
+        fontWeight : 'bold'
+    },
+    container : {
+        flex : 1
+    }
+})
 
 export default Profile;

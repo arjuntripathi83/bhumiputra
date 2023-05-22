@@ -1,18 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+// import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  AppRegistry,
+  Button,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+// import { initializeApp } from "firebase/app";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from '@react-navigation/native';
-import Login from './screens/Login';
-import Home from './screens/Home';
-import Equipmentsbrowser from './screens/Equipmentsbrowser';
-import Profile from './screens/Profile';
-
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import IonicIcon from 'react-native-vector-icons/Ionicons';
+import Home from "./screens/Home";
+import Equipmentsbrowser from "./screens/Equipmentsbrowser";
+import Profile from "./screens/Profile";
 
-const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const Tab = createBottomTabNavigator();
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <NavigationContainer>
@@ -49,8 +56,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    // backgroundColor: '#fff',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // paddingTop: 50,
   },
 });
