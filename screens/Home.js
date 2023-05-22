@@ -1,16 +1,3 @@
-// import React from "react";
-// import { Text, View } from "react-native";
-// import Carousel from "react-native-snap-carousel";
-// const Home = () => {
-//   return (
-//     <View>
-//       <Text>Home</Text>
-//     </View>
-//   );
-// };
-
-// export default Home;
-
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
