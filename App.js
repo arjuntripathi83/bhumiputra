@@ -34,8 +34,8 @@ export default function App() {
                   iconName = focused ? 'home' : 'home-outline';
                 }else if(route.name === 'Browser'){
                   iconName = focused ? 'cart-sharp' :'cart-outline' ;
-                }else if(route.name === 'Flexbox'){
-                  iconName = focused ? 'dribbble' : 'dribbble-square';
+                }else if(route.name === 'Profile'){
+                  iconName = focused ? 'person-circle' : 'person-circle-outline';
                 }else if(route.name === 'Register'){
                   iconName = 'user';
                 }

@@ -61,6 +61,9 @@ const EquipmentsDetails = ({ equipmentData, visible, setVisible }) => {
           <Text style={styles.addToCartButtonText}>Add to Cart</Text>
         </View>
       </View>
+      <View style={styles.buyNowButton}>
+          <Text style={styles.buyNowButton}>Buy Now</Text>
+          </View>
     </Modal>
   );
 };
@@ -116,6 +119,17 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
     borderRadius: 4,
     padding: 12,
+  },
+  buyNowButton: {
+    backgroundColor: "yellow",
+    borderRadius: 4,
+    padding: 12,
+    alignItems: "center",
+  },
+  buyNowButtonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
   },
   ratingCompleted(rating) {
     console.log("Rating is: " + rating);
