@@ -1,15 +1,4 @@
-// import React from 'react'
-
-// const Sellerlogin = () => {
-//   return (
-//     <View><Text>
-//     Sellerlogin</Text></View>
-//   )
-// }
-
-// export default Sellerlogin 
-
-import React, { useState } from 'react';
+ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 const LoginPage = () => {
