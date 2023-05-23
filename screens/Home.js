@@ -41,4 +41,23 @@ const Home = () => {
   );
 };
 
+<<<<<<< HEAD
 export default Home;
+=======
+  render() 
+    return (
+      <View>
+        <Carousel
+          data={this.carouselItems}
+          renderItem={this.renderCarouselItem}
+          sliderWidth={300}
+          itemWidth={300}
+        />
+      </View>
+    );
+  
+
+
+export default CarouselExample;
+
+>>>>>>> 365db3d73dc218cfc227c0f2ace85e01bb1eec71

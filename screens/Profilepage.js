@@ -9,11 +9,11 @@ const ProfilePage = () => {
           source={require('./images/profile-picture.jpg')}
           style={styles.profilePicture}
         />
-        <Text style={styles.profileName}>John Doe</Text>
+        <Text style={styles.profileName}>Jaggu kaliya</Text>
       </View>
       <View style={styles.infoContainer}>
         <Text style={styles.infoText}>Email: johndoe@example.com</Text>
-        <Text style={styles.infoText}>Location: New York</Text>
+        <Text style={styles.infoText}>Location: Dholakpur</Text>
         <Text style={styles.infoText}>Member Since: Jan 2023</Text>
       </View>
     </View>
