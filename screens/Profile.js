@@ -1,6 +1,9 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 
+import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+
 const Profile = () => {
   return (
     <View style={styles.container}>
@@ -18,8 +21,8 @@ const Profile = () => {
         <Text style={styles.infoText}>Member Since: Jan 2023</Text>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
