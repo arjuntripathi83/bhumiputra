@@ -1,13 +1,39 @@
-import React from "react";
-import { View, Text, Image } from "react-native";
+import React, { useState } from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, TextInput } from "react-native";
+import { IconButton } from "react-native-paper";
 import Carousel from "react-native-snap-carousel";
 
 const Home = () => {
+  const [searchText, setSearchText] = useState("");
+  const [isListening, setIsListening] = useState(false);
+
+  const startListening = async () => {
+    setIsListening(true);
+    try {
+      // Native module code to start listening
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const stopListening = async () => {
+    setIsListening(false);
+    try {
+      // Native module code to stop listening
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const onSpeechResults = (event) => {
+    setSearchText(event.value[0]);
+  };
+
   const carouselItems = [
     {
       id: 1,
       title: "Item 1",
-      uri: "https://www.deere.com/assets/images/common/products/tractors/8rx-370-with-truck-1024x576.jpg",
+      uri: "https://th.bing.com/th/id/OIP.1BFImfy-kcfN7hrCI1bJ5gHaH3?pid=ImgDet&rs=1",
     },
     {
       id: 2,
@@ -22,23 +48,172 @@ const Home = () => {
   ];
 
   const renderCarouselItem = ({ item }) => (
-    <View>
-      <Text>{item.title}</Text>
-      <Image source={{ uri: item.uri }} style={{ width: 300, height: 200 }} />
+    <View style={styles.carouselItem}>
+      <Text style={styles.carouselTitle}>{item.title}</Text>
+      <Image source={{ uri: item.uri }} style={styles.carouselImage} />
     </View>
   );
 
   return (
-    <View>
-      <Text>Home Page</Text>
-      <Carousel
-        data={carouselItems}
-        renderItem={renderCarouselItem}
-        sliderWidth={300}
-        itemWidth={300}
-      />
-    </View>
+    <ScrollView style={styles.container}>
+      <View style={styles.searchContainer}>
+        <View style={styles.searchBox}>
+          <IconButton
+            icon="magnify"
+            color="black"
+            size={20}
+            onPress={() => console.log("Search pressed")}
+          />
+          <TextInput
+            style={styles.searchText}
+            value={searchText}
+            onChangeText={setSearchText}
+            placeholder="Search by product, brand & more..."
+          />
+          <IconButton
+            icon="microphone"
+            color={isListening ? "red" : "black"}
+            size={20}
+            onPress={isListening ? stopListening : startListening}
+          />
+        </View>
+        <Text>{searchText}</Text>
+        <Carousel
+          data={carouselItems}
+          renderItem={renderCarouselItem}
+          sliderWidth={500}
+          itemWidth={600}
+        />
+        <TouchableOpacity style={styles.suggestedButton} onPress={() => console.log("Suggested for you pressed")}>
+          <Text style={styles.suggestedButtonText}>Suggested for You</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.productSection}>
+        <View style={styles.productContainer}>
+          <Image
+            source={{ uri: "https://th.bing.com/th/id/OIP.qdhvxg0dnLQrzX_SL1GkHgHaEK?pid=ImgDet&rs=1" }}
+            style={styles.productImage}
+          />
+          <Text style={styles.productTitle}>Product 1</Text>
+        </View>
+      </View>
+      <View style={styles.productSection}>
+        <View style={styles.productContainer}>
+          <Image
+
+
+            source={{ uri: "https://dealernet.s3.amazonaws.com/webres/john-deere-images/dh11-series-disk-harrows.jpg" }}
+            style={styles.productImage}
+          />
+          <Text style={styles.productTitle}>Product 2</Text>
+        </View>
+      </View>
+      {/* Add more product containers as needed */}
+      <TouchableOpacity style={styles.topItemsButton} onPress={() => console.log("Top Items pressed")}>
+        <Text style={styles.topItemsButtonText}>Top Items</Text>
+      </TouchableOpacity>
+      <View style={styles.productSection}>
+        <View style={styles.productContainer}>
+          <Image
+            source={{ uri: "https://th.bing.com/th/id/R.e05f7ef9a31625cb96ab5497abbdc6dd?rik=PpdnCu6JV1Mv2Q&riu=http%3a%2f%2fwww.tractordata.com%2fnews%2f2013%2f08%2fdeere-7290r.jpg&ehk=hGKheqkr36qzYaJ8D8barHQMjPcIPDHIqNmbKITugzM%3d&risl=&pid=ImgRaw&r=0" }}
+            style={styles.productImage}
+          />
+          <Text style={styles.productTitle}>Product 1</Text>
+        </View>
+      </View>
+      <View style={styles.productSection}>
+        <View style={styles.productContainer}>
+          <Image
+            source={{ uri: "https://th.bing.com/th/id/OIP.h0uYaJhddxcqt0s7jSAmOAHaJe?pid=ImgDet&rs=1" }}
+            style={styles.productImage}
+          />
+          <Text style={styles.productTitle}>Product 2</Text>
+        </View>
+      </View>
+      {/* Add more product containers as needed */}
+    </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+  },
+  searchContainer: {
+    marginBottom: 16,
+  },
+  searchBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "gray",
+    borderRadius: 4,
+    paddingHorizontal: 12,
+    marginBottom: 8,
+  },
+  searchText: {
+    flex: 1,
+    marginLeft: 8,
+    color: "gray",
+  },
+  carouselItem: {
+    marginBottom: 16,
+  },
+  carouselTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+  carouselImage: {
+    width: "100%",
+    height: 200,
+  },
+  suggestedButton: {
+    backgroundColor: "skyblue",
+    borderRadius: 4,
+    padding: 12,
+    alignItems: "center",
+  },
+  suggestedButtonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  productSection: {
+    marginBottom: 16,
+  },
+  productContainer: {
+    width: "100%",
+    marginBottom: 8,
+    borderWidth: 1,
+    borderColor: "gray",
+    borderRadius: 4,
+    padding: 8,
+  },
+  productImage: {
+    width: "100%",
+    height: 200,
+    marginBottom: 8,
+  },
+  productTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  topItemsButton: {
+    backgroundColor: "grey",
+    borderRadius: 4,
+    padding: 12,
+
+
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  topItemsButtonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+});
 
 export default Home;
