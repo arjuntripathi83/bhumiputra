@@ -1,16 +1,57 @@
-import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, Modal } from "react-native";
+import React from "react";
+import { View, Text, Image, StyleSheet, Modal, TouchableOpacity } from "react-native";
 import { IconButton } from "react-native-paper";
-import { Rating, productRating } from "react-native-ratings";
+import { Rating } from "react-native-ratings";
+
 const EquipmentsDetails = ({ equipmentData, visible, setVisible }) => {
+  const ratingCompleted = (rating) => {
+    console.log("Rating is: " + rating);
+  };
+
   return (
     <Modal
       visible={visible}
-      onRequestClose={(e) => setVisible(false)}
+      onRequestClose={() => setVisible(false)}
       animationType="slide"
     >
       <View style={styles.container}>
-        <View>
+        <View style={styles.topBar}>
+          <IconButton
+            icon="arrow-left"
+            color="black"
+            size={20}
+            onPress={() => setVisible(false)}
+          />
+          <View style={styles.topRightButtons}>
+            <IconButton
+              icon="magnify"
+              color="black"
+              size={20}
+              onPress={() => console.log("Search pressed")}
+            />
+            <IconButton
+              icon="cart"
+              color="black"
+              size={20}
+              onPress={() => console.log("Cart pressed")}
+            />
+          </View>
+        </View>
+        <View style={styles.right}>
+        <IconButton
+            icon="heart"
+            color="red"
+            size={20}
+            onPress={() => console.log("Pressed")}
+          />
+        <IconButton
+            icon="share-variant"
+            color="black"
+            size={20}
+            onPress={() => console.log("Share pressed")}
+          />
+          
+          
           <Image
             source={{
               uri: equipmentData.obj.Image,
@@ -18,52 +59,33 @@ const EquipmentsDetails = ({ equipmentData, visible, setVisible }) => {
             style={styles.productImage}
             resizeMode="cover"
           />
-          <View
-            style={{
-              position: "absolute",
-              right: 10,
-              top: 10,
-              backgroundColor: "transparent",
-            }}
-          >
-            <IconButton
-              icon="heart"
-              iconColor="red"
-              size={20}
-              onPress={() => console.log("Pressed")}
-            />
-          </View>
+          
         </View>
         <View style={styles.productDetails}>
           <Text style={styles.productBrand}>{equipmentData.obj.Brand}</Text>
           <Text style={styles.productTitle}>{equipmentData.obj.Title}</Text>
+          <View style={styles.ratingContainer}>
+            <Rating
+              
+              onFinishRating={ratingCompleted}
+              style={{ paddingVertical: 10 }}
+            />
+            <Text style={styles.productReviews}>1234 Reviews</Text>
+          </View>
           <Text style={styles.productPrice}>{equipmentData.obj.Price}</Text>
           <Text style={styles.productDescription}>
             {equipmentData.obj.Description}
           </Text>
-          <Text style={styles.productRating}>
-            count={11}
-            reviews={["Terrible", "Bad", "Good", "Very Good", "Excelent"]}
-            defaultRating={11}
-            size={20}
-            <Rating
-              showRating
-              onFinishRating={this.ratingCompleted}
-              style={{ paddingVertical: 10 }}
-            />
-          </Text>
-
-          <Text style={styles.productReviews}>Reviews: 1234</Text>
           <Text style={styles.productAvailability}>In Stock</Text>
           {/* Add other product details as needed */}
         </View>
-        <View style={styles.addToCartButton}>
+        <TouchableOpacity style={styles.addToCartButton}>
           <Text style={styles.addToCartButtonText}>Add to Cart</Text>
-        </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buyNowButton}>
+          <Text style={styles.buyNowButtonText}>Buy Now</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.buyNowButton}>
-          <Text style={styles.buyNowButton}>Buy Now</Text>
-          </View>
     </Modal>
   );
 };
@@ -73,31 +95,55 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
+  topBar: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  topRightButtons: {
+    flexDirection: "row",
+  },
+  header: {
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 16,
+  },
   productImage: {
-    width: "100%",
+    width: "70%",
     height: 300,
     marginBottom: 16,
   },
   productDetails: {
     marginBottom: 16,
   },
-  productTitle: {
+  productBrand: {
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 8,
   },
-  productPrice: {
+  productTitle: {
     fontSize: 16,
+    marginBottom: 8,
+  },
+  ratingContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  productReviews: {
+    marginLeft: 8,
+    fontSize: 14,
+    color: "gray",
+  },
+  productPrice: {
+    fontSize: 18,
+    fontWeight: "bold",
     marginBottom: 8,
   },
   productDescription: {
     marginBottom: 8,
-  },
-  productRating: {
-    marginBottom: 4,
-  },
-  productReviews: {
-    marginBottom: 4,
   },
   productAvailability: {
     marginBottom: 8,
@@ -108,31 +154,24 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 12,
     alignItems: "center",
+    marginBottom: 8,
   },
   addToCartButtonText: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
   },
-  whishlistButton: {
-    Type: "Heart",
-    backgroundColor: "red",
-    borderRadius: 4,
-    padding: 12,
-  },
   buyNowButton: {
     backgroundColor: "yellow",
     borderRadius: 4,
     padding: 12,
     alignItems: "center",
+    marginBottom: 8,
   },
   buyNowButtonText: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
-  },
-  ratingCompleted(rating) {
-    console.log("Rating is: " + rating);
   },
 });
 
