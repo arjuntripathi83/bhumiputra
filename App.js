@@ -16,6 +16,7 @@ import IonicIcon from 'react-native-vector-icons/Ionicons';
 import Home from "./screens/Home";
 import Equipmentsbrowser from "./screens/Equipmentsbrowser";
 import Profile from "./screens/Profile";
+import Fertilizersbrowser from "./screens/Fertilizersbrowser";
 
 
 export default function App() {
@@ -32,7 +33,9 @@ export default function App() {
                 size = focused ? 32 : 24;
                 if(route.name === 'Home'){
                   iconName = focused ? 'home' : 'home-outline';
-                }else if(route.name === 'Browser'){
+                }else if(route.name === 'EquipmentBrowser'){
+                  iconName = focused ? 'cart-sharp' :'cart-outline' ;
+                }else if(route.name === 'FertilizerBrowser'){
                   iconName = focused ? 'cart-sharp' :'cart-outline' ;
                 }else if(route.name === 'Profile'){
                   iconName = focused ? 'person-circle' : 'person-circle-outline';
@@ -45,7 +48,8 @@ export default function App() {
             })}
           >
             <Tab.Screen name="Home" children={ () => <Home /> } />
-            <Tab.Screen name="Browser" children={ () => <Equipmentsbrowser /> } />
+            <Tab.Screen name="EquipmentBrowser" children={ () => <Equipmentsbrowser /> } />
+            <Tab.Screen name="FertilizerBrowser" children={ () => <Fertilizersbrowser /> } />
             <Tab.Screen name="Profile" children={ () => <Profile /> } />
           </Tab.Navigator>
       </NavigationContainer>
