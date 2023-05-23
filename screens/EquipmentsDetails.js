@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, Image, StyleSheet, Modal } from "react-native";
 import { IconButton } from "react-native-paper";
-import { Rating, productRating } from "react-native-ratings";
+import { Rating } from "react-native-ratings";
+
 const EquipmentsDetails = ({ equipmentData, visible, setVisible }) => {
+  const ratingCompleted = (rating) => {
+    console.log("Rating is: " + rating);
+  };
+
   return (
     <Modal
       visible={visible}
-      onRequestClose={(e) => setVisible(false)}
+      onRequestClose={() => setVisible(false)}
       animationType="slide"
     >
       <View style={styles.container}>
@@ -28,7 +33,7 @@ const EquipmentsDetails = ({ equipmentData, visible, setVisible }) => {
           >
             <IconButton
               icon="heart"
-              iconColor="red"
+              color="red" // Changed 'iconColor' to 'color'
               size={20}
               onPress={() => console.log("Pressed")}
             />
@@ -41,18 +46,13 @@ const EquipmentsDetails = ({ equipmentData, visible, setVisible }) => {
           <Text style={styles.productDescription}>
             {equipmentData.obj.Description}
           </Text>
-          <Text style={styles.productRating}>
-            count={11}
-            reviews={["Terrible", "Bad", "Good", "Very Good", "Excelent"]}
-            defaultRating={11}
-            size={20}
+          <View style={styles.productRating}>
             <Rating
               showRating
-              onFinishRating={this.ratingCompleted}
+              onFinishRating={ratingCompleted} // Removed 'this.' from 'this.ratingCompleted'
               style={{ paddingVertical: 10 }}
             />
-          </Text>
-
+          </View>
           <Text style={styles.productReviews}>Reviews: 1234</Text>
           <Text style={styles.productAvailability}>In Stock</Text>
           {/* Add other product details as needed */}
@@ -60,10 +60,10 @@ const EquipmentsDetails = ({ equipmentData, visible, setVisible }) => {
         <View style={styles.addToCartButton}>
           <Text style={styles.addToCartButtonText}>Add to Cart</Text>
         </View>
+        <View style={styles.buyNowButton}>
+          <Text style={styles.buyNowButtonText}>Buy Now</Text>
+        </View>
       </View>
-      <View style={styles.buyNowButton}>
-          <Text style={styles.buyNowButton}>Buy Now</Text>
-          </View>
     </Modal>
   );
 };
@@ -114,12 +114,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-  whishlistButton: {
-    Type: "Heart",
-    backgroundColor: "red",
-    borderRadius: 4,
-    padding: 12,
-  },
   buyNowButton: {
     backgroundColor: "yellow",
     borderRadius: 4,
@@ -130,9 +124,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
-  },
-  ratingCompleted(rating) {
-    console.log("Rating is: " + rating);
   },
 });
 

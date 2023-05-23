@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
+import Carousel from "react-native-snap-carousel";
 
 const Home = () => {
-  carouselItems = [
+  const carouselItems = [
     {
       id: 1,
       title: "Item 1",
@@ -20,27 +21,24 @@ const Home = () => {
     },
   ];
 
+  const renderCarouselItem = ({ item }) => (
+    <View>
+      <Text>{item.title}</Text>
+      <Image source={{ uri: item.uri }} style={{ width: 300, height: 200 }} />
+    </View>
+  );
 
   return (
     <View>
       <Text>Home Page</Text>
+      <Carousel
+        data={carouselItems}
+        renderItem={renderCarouselItem}
+        sliderWidth={300}
+        itemWidth={300}
+      />
     </View>
   );
 };
 
-  render() {
-    return (
-      <View>
-        <Carousel
-          data={this.carouselItems}
-          renderItem={this.renderCarouselItem}
-          sliderWidth={300}
-          itemWidth={300}
-        />
-      </View>
-    );
-  }
-}
-
-export default CarouselExample;
-
+export default Home;
