@@ -133,7 +133,7 @@ const Equipmentsbrowser = () => {
           <FlatList
             data={categoryOptions}
             renderItem={({ item }) => (
-              <Button style={styles.cateBtn} mode={selCategory === item ? "contained" : 'outlined'} onPress={e => filterByCategory(item)}>
+              <Button style={styles.cateBtn} mode={selCategory === item ? "contained" : 'outlined'} onPress={e => filterByCat (item)}>
                 {item}
               </Button>
             )}
