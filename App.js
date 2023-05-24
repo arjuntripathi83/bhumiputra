@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Image
 } from "react-native";
 // import { initializeApp } from "firebase/app";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -34,6 +35,7 @@ export default function App() {
                 if(route.name === 'Home'){
                   iconName = focused ? 'home' : 'home-outline';
                 }else if(route.name === 'EquipmentBrowser'){
+                  return <Image source={require('./assets/icons/equipment.png')} style={{width: 24, height: 24}} />
                   iconName = focused ? 'cart-sharp' :'cart-outline' ;
                 }else if(route.name === 'FertilizerBrowser'){
                   iconName = focused ? 'cart-sharp' :'cart-outline' ;
