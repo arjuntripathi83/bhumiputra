@@ -24,12 +24,13 @@ const Seedsbrowser = () => {
         obj: doc.data(),
       }));
       console.log(data);
-      setSeedsList(data);
+      setSeedList(data);
       setLoading(false);
     });
   };
 
   useEffect(() => {
+    console.log('seed');
     fetchSeedsData();
   }, []);
 

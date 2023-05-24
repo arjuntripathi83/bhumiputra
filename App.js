@@ -18,7 +18,8 @@ import Home from "./screens/Home";
 import Equipmentsbrowser from "./screens/Equipmentsbrowser";
 import Profile from "./screens/Profile";
 import Fertilizersbrowser from "./screens/Fertilizersbrowser";
-
+import Seedsbrowser from "./screens/Seedsbrowser";
+import { IconButton } from "react-native-paper";
 
 export default function App() {
   const Tab = createBottomTabNavigator();
@@ -39,8 +40,11 @@ export default function App() {
                   iconName = focused ? 'cart-sharp' :'cart-outline' ;
                 }else if(route.name === 'FertilizerBrowser'){
                   iconName = focused ? 'cart-sharp' :'cart-outline' ;
-                }else if(route.name === 'Profile'){
-                  iconName = focused ? 'person-circle' : 'person-circle-outline';
+                }else if(route.name === 'Seedsbrowser'){
+
+                  iconName = focused ? 'nutrition' : 'nutrition-outline';
+                  // return <Image source={require('./assets/icons/equipment.png')} style={{width: 24, height: 24}} />
+
                 }else if(route.name === 'Register'){
                   iconName = 'user';
                 }
@@ -49,10 +53,21 @@ export default function App() {
               }
             })}
           >
-            <Tab.Screen name="Home" children={ () => <Home /> } />
-            <Tab.Screen name="EquipmentBrowser" children={ () => <Equipmentsbrowser /> } />
+            <Tab.Screen  name="Home" children={ () => <Home /> } />
+            <Tab.Screen name="EquipmentBrowser" children={ () => <Equipmentsbrowser /> } options={{
+    headerRight: (props) => (
+      < IconButton
+        {...props}
+        title="nice"
+        onPress={() => {
+          // Do something
+          // iconName = focused ? 'ios-person-circle' :'ios-person-circle-outline' ;
+        }}
+      />
+    ),
+  }} />
             <Tab.Screen name="FertilizerBrowser" children={ () => <Fertilizersbrowser /> } />
-            <Tab.Screen name="Profile" children={ () => <Profile /> } />
+            <Tab.Screen name="Seedsbrowser" children={ () => <Seedsbrowser /> } />
           </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaView>
