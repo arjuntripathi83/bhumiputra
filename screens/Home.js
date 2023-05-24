@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  TextInput,
+} from "react-native";
 import { IconButton } from "react-native-paper";
 import Carousel from "react-native-snap-carousel";
 
@@ -84,14 +92,19 @@ const Home = () => {
           sliderWidth={500}
           itemWidth={600}
         />
-        <TouchableOpacity style={styles.suggestedButton} onPress={() => console.log("Suggested for you pressed")}>
+        <TouchableOpacity
+          style={styles.suggestedButton}
+          onPress={() => console.log("Suggested for you pressed")}
+        >
           <Text style={styles.suggestedButtonText}>Suggested for You</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.productSection}>
         <View style={styles.productContainer}>
           <Image
-            source={{ uri: "https://th.bing.com/th/id/OIP.qdhvxg0dnLQrzX_SL1GkHgHaEK?pid=ImgDet&rs=1" }}
+            source={{
+              uri: "https://th.bing.com/th/id/OIP.qdhvxg0dnLQrzX_SL1GkHgHaEK?pid=ImgDet&rs=1",
+            }}
             style={styles.productImage}
           />
           <Text style={styles.productTitle}>Product 1</Text>
@@ -100,22 +113,27 @@ const Home = () => {
       <View style={styles.productSection}>
         <View style={styles.productContainer}>
           <Image
-
-
-            source={{ uri: "https://dealernet.s3.amazonaws.com/webres/john-deere-images/dh11-series-disk-harrows.jpg" }}
+            source={{
+              uri: "https://dealernet.s3.amazonaws.com/webres/john-deere-images/dh11-series-disk-harrows.jpg",
+            }}
             style={styles.productImage}
           />
           <Text style={styles.productTitle}>Product 2</Text>
         </View>
       </View>
       {/* Add more product containers as needed */}
-      <TouchableOpacity style={styles.topItemsButton} onPress={() => console.log("Top Items pressed")}>
+      <TouchableOpacity
+        style={styles.topItemsButton}
+        onPress={() => console.log("Top Items pressed")}
+      >
         <Text style={styles.topItemsButtonText}>Top Items</Text>
       </TouchableOpacity>
       <View style={styles.productSection}>
         <View style={styles.productContainer}>
           <Image
-            source={{ uri: "https://th.bing.com/th/id/R.e05f7ef9a31625cb96ab5497abbdc6dd?rik=PpdnCu6JV1Mv2Q&riu=http%3a%2f%2fwww.tractordata.com%2fnews%2f2013%2f08%2fdeere-7290r.jpg&ehk=hGKheqkr36qzYaJ8D8barHQMjPcIPDHIqNmbKITugzM%3d&risl=&pid=ImgRaw&r=0" }}
+            source={{
+              uri: "https://th.bing.com/th/id/R.e05f7ef9a31625cb96ab5497abbdc6dd?rik=PpdnCu6JV1Mv2Q&riu=http%3a%2f%2fwww.tractordata.com%2fnews%2f2013%2f08%2fdeere-7290r.jpg&ehk=hGKheqkr36qzYaJ8D8barHQMjPcIPDHIqNmbKITugzM%3d&risl=&pid=ImgRaw&r=0",
+            }}
             style={styles.productImage}
           />
           <Text style={styles.productTitle}>Product 1</Text>
@@ -124,7 +142,9 @@ const Home = () => {
       <View style={styles.productSection}>
         <View style={styles.productContainer}>
           <Image
-            source={{ uri: "https://th.bing.com/th/id/OIP.h0uYaJhddxcqt0s7jSAmOAHaJe?pid=ImgDet&rs=1" }}
+            source={{
+              uri: "https://th.bing.com/th/id/OIP.h0uYaJhddxcqt0s7jSAmOAHaJe?pid=ImgDet&rs=1",
+            }}
             style={styles.productImage}
           />
           <Text style={styles.productTitle}>Product 2</Text>
@@ -205,7 +225,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 12,
 
-
     alignItems: "center",
     marginBottom: 16,
   },
@@ -216,4 +235,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;  
+export default Home;
