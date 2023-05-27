@@ -1,8 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Modal } from 'react-native';
 
-const Profile = () => {
+const Profile = ({visible, setVisible}) => {
   return (
+    <Modal
+      visible={visible}
+      onRequestClose={() => setVisible(false)}
+      animationType="fade"
+    >
     <View style={styles.container}>
       <View style={styles.profileContainer}>
         <Image
@@ -18,6 +24,7 @@ const Profile = () => {
         <Text style={styles.infoText}>Member Since: Jan 2023</Text>
       </View>
     </View>
+    </Modal>
   );
 };
 
