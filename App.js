@@ -60,8 +60,7 @@ export default function App() {
         {...props}
         title="nice"
         onPress={() => {
-          // Do something
-          // iconName = focused ? 'ios-person-circle' :'ios-person-circle-outline' ;
+
         }}
       />
     ),
