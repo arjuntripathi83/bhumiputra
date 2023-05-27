@@ -142,7 +142,7 @@ const Equipmentsbrowser = () => {
           />
         </View>
       </View>
-      <ScrollView>{showProducts()}</ScrollView>
+      <ScrollView style={styles.body}>{showProducts()}</ScrollView>
       {selEquipment && (
         <EquipmentsDetails
           equipmentData={selEquipment}
@@ -162,6 +162,10 @@ const styles = StyleSheet.create({
   },
   header: {
     // backgroundColor: "#ccc",
+    padding: 16,
+  },
+  body: {
+    flex: 1,
     padding: 16,
   },
   productImage: {
