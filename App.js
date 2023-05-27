@@ -56,11 +56,12 @@ export default function App() {
             <Tab.Screen  name="Home" children={ () => <Home /> } />
             <Tab.Screen name="EquipmentBrowser" children={ () => <Equipmentsbrowser /> } options={{
     headerRight: (props) => (
-      < IconButton
+      <IconButton
         {...props}
         title="nice"
+        icon='profile'
         onPress={() => {
-
+          alert('open profile')
         }}
       />
     ),
