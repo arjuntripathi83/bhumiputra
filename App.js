@@ -62,7 +62,7 @@ export default function App() {
 
                 </IconButton>
               )
-            }} children={() => <Home />} />
+            }} children={(props) => <Home  />} />
             <Tab.Screen
               name="EquipmentBrowser"
               children={() => <Equipmentsbrowser />}

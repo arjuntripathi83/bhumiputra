@@ -1,18 +1,10 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-  TextInput,
-} from "react-native";
-import { IconButton } from "react-native-paper";
-import Carousel from "react-native-snap-carousel";
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import { IconButton } from 'react-native-paper';
+import Carousel from 'react-native-snap-carousel';
 
-const Home = () => {
-  const [searchText, setSearchText] = useState("");
+const Home = ({ navigation }) => {
+  const [searchText, setSearchText] = useState('');
   const [isListening, setIsListening] = useState(false);
 
   const startListening = async () => {
@@ -40,19 +32,19 @@ const Home = () => {
   const carouselItems = [
     {
       id: 1,
-      title: "Item 1",
-      uri: "https://th.bing.com/th/id/OIP.1BFImfy-kcfN7hrCI1bJ5gHaH3?pid=ImgDet&rs=1",
+      title: 'Item 1',
+      uri: 'https://th.bing.com/th/id/OIP.1BFImfy-kcfN7hrCI1bJ5gHaH3?pid=ImgDet&rs=1'
     },
     {
       id: 2,
-      title: "Item 2",
-      uri: "https://www.deere.com/assets/images/common/products/tractors/8rx-370-with-truck-1024x576.jpg",
+      title: 'Item 2',
+      uri: 'https://www.deere.com/assets/images/common/products/tractors/8rx-370-with-truck-1024x576.jpg'
     },
     {
       id: 3,
-      title: "Item 3",
-      uri: "https://www.deere.com/assets/images/common/products/tractors/8rx-370-with-truck-1024x576.jpg",
-    },
+      title: 'Item 3',
+      uri: 'https://www.deere.com/assets/images/common/products/tractors/8rx-370-with-truck-1024x576.jpg'
+    }
   ];
 
   const renderCarouselItem = ({ item }) => (
@@ -64,57 +56,57 @@ const Home = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.searchContainer}>
-        <View style={styles.searchBox}>
-          <IconButton
-            icon="magnify"
-            color="black"
-            size={20}
-            onPress={() => console.log("Search pressed")}
-          />
-          <TextInput
-            style={styles.searchText}
-            value={searchText}
-            onChangeText={setSearchText}
-            placeholder="Search by product, brand & more..."
-          />
-          <IconButton
-            icon="microphone"
-            color={isListening ? "red" : "black"}
-            size={20}
-            onPress={isListening ? stopListening : startListening}
-          />
+      <View style={styles.section}>
+        <View style={styles.category}>
+          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
+          <Text>Equipments</Text>
         </View>
-        <Text>{searchText}</Text>
-        <Carousel
-          data={carouselItems}
-          renderItem={renderCarouselItem}
-          sliderWidth={500}
-          itemWidth={600}
-        />
+        <View style={styles.category}>
+          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
+          <Text>Equipments</Text>
+        </View>
+        <View style={styles.category}>
+          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
+          <Text>Equipments</Text>
+        </View>
+      </View>
+      <View style={styles.section}>
+        <View style={styles.category}>
+          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
+          <Text>Equipments</Text>
+        </View>
+        <View style={styles.category}>
+          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
+          <Text>Equipments</Text>
+        </View>
+        <View style={styles.category}>
+          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
+          <Text>Equipments</Text>
+        </View>
+      </View>
+      <View style={styles.productSection}>
         <TouchableOpacity
-          style={styles.suggestedButton}
-          onPress={() => console.log("Suggested for you pressed")}
+          onPress={() => {
+            console.log('Product 1 pressed');
+            navigation.navigate('Equipmentsbrowser');
+          }}
         >
-          <Text style={styles.suggestedButtonText}>Suggested for You</Text>
+          <View style={styles.productContainer}>
+            <Image
+              source={{
+                uri: 'https://th.bing.com/th/id/OIP.qdhvxg0dnLQrzX_SL1GkHgHaEK?pid=ImgDet&rs=1'
+              }}
+              style={styles.productImage}
+            />
+            <Text style={styles.productTitle}>Product 1</Text>
+          </View>
         </TouchableOpacity>
       </View>
       <View style={styles.productSection}>
         <View style={styles.productContainer}>
           <Image
             source={{
-              uri: "https://th.bing.com/th/id/OIP.qdhvxg0dnLQrzX_SL1GkHgHaEK?pid=ImgDet&rs=1",
-            }}
-            style={styles.productImage}
-          />
-          <Text style={styles.productTitle}>Product 1</Text>
-        </View>
-      </View>
-      <View style={styles.productSection}>
-        <View style={styles.productContainer}>
-          <Image
-            source={{
-              uri: "https://dealernet.s3.amazonaws.com/webres/john-deere-images/dh11-series-disk-harrows.jpg",
+              uri: 'https://dealernet.s3.amazonaws.com/webres/john-deere-images/dh11-series-disk-harrows.jpg'
             }}
             style={styles.productImage}
           />
@@ -122,17 +114,14 @@ const Home = () => {
         </View>
       </View>
       {/* Add more product containers as needed */}
-      <TouchableOpacity
-        style={styles.topItemsButton}
-        onPress={() => console.log("Top Items pressed")}
-      >
+      <TouchableOpacity style={styles.topItemsButton} onPress={() => console.log('Top Items pressed')}>
         <Text style={styles.topItemsButtonText}>Top Items</Text>
       </TouchableOpacity>
       <View style={styles.productSection}>
         <View style={styles.productContainer}>
           <Image
             source={{
-              uri: "https://th.bing.com/th/id/R.e05f7ef9a31625cb96ab5497abbdc6dd?rik=PpdnCu6JV1Mv2Q&riu=http%3a%2f%2fwww.tractordata.com%2fnews%2f2013%2f08%2fdeere-7290r.jpg&ehk=hGKheqkr36qzYaJ8D8barHQMjPcIPDHIqNmbKITugzM%3d&risl=&pid=ImgRaw&r=0",
+              uri: 'https://th.bing.com/th/id/R.e05f7ef9a31625cb96ab5497abbdc6dd?rik=PpdnCu6JV1Mv2Q&riu=http%3a%2f%2fwww.tractordata.com%2fnews%2f2013%2f08%2fdeere-7290r.jpg&ehk=hGKheqkr36qzYaJ8D8barHQMjPcIPDHIqNmbKITugzM%3d&risl=&pid=ImgRaw&r=0'
             }}
             style={styles.productImage}
           />
@@ -143,7 +132,7 @@ const Home = () => {
         <View style={styles.productContainer}>
           <Image
             source={{
-              uri: "https://th.bing.com/th/id/OIP.h0uYaJhddxcqt0s7jSAmOAHaJe?pid=ImgDet&rs=1",
+              uri: 'https://th.bing.com/th/id/OIP.h0uYaJhddxcqt0s7jSAmOAHaJe?pid=ImgDet&rs=1'
             }}
             style={styles.productImage}
           />
@@ -158,81 +147,98 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: 16
   },
   searchContainer: {
-    marginBottom: 16,
+    marginBottom: 16
   },
   searchBox: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 1,
-    borderColor: "gray",
+    borderColor: 'gray',
     borderRadius: 4,
     paddingHorizontal: 12,
-    marginBottom: 8,
+    marginBottom: 8
   },
   searchText: {
     flex: 1,
     marginLeft: 8,
-    color: "gray",
+    color: 'gray'
   },
   carouselItem: {
-    marginBottom: 16,
+    marginBottom: 16
   },
   carouselTitle: {
     fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 8,
+    fontWeight: 'bold',
+    marginBottom: 8
   },
   carouselImage: {
-    width: "100%",
-    height: 200,
+    width: '100%',
+    height: 200
   },
   suggestedButton: {
-    backgroundColor: "skyblue",
+    backgroundColor: 'skyblue',
     borderRadius: 4,
     padding: 12,
-    alignItems: "center",
+    alignItems: 'center'
   },
   suggestedButtonText: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold'
   },
   productSection: {
-    marginBottom: 16,
+    marginBottom: 16
   },
   productContainer: {
-    width: "100%",
+    width: '100%',
     marginBottom: 8,
     borderWidth: 1,
-    borderColor: "gray",
+    borderColor: 'gray',
     borderRadius: 4,
-    padding: 8,
+    padding: 8
   },
   productImage: {
-    width: "100%",
+    width: '100%',
     height: 200,
-    marginBottom: 8,
+    marginBottom: 8
   },
   productTitle: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold'
   },
   topItemsButton: {
-    backgroundColor: "grey",
+    backgroundColor: 'grey',
     borderRadius: 4,
     padding: 12,
 
-    alignItems: "center",
-    marginBottom: 16,
+    alignItems: 'center',
+    marginBottom: 16
   },
   topItemsButtonText: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold'
   },
+  section: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    marginBottom: 16
+  },
+  category: {
+    width: '20%',
+    height: 100,
+    // backgroundColor: 'skyblue',
+    borderRadius: 4,
+  },
+  categoryIcon: {
+    width: '100%',
+    height: '100%'
+
+  }
 });
 
 export default Home;
