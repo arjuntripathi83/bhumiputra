@@ -19,11 +19,13 @@ export default function App() {
   const Tab = createBottomTabNavigator();
 
   const [profileOpen, setProfileOpen] = useState(false);
+  
+  const [LoginOpen, setLoginOpen] = useState(false);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Profile visible={profileOpen} setVisible={setProfileOpen} />
-      
+
       <UserProvider>
         <NavigationContainer>
           <Tab.Navigator
@@ -53,7 +55,12 @@ export default function App() {
           >
             <Tab.Screen name="Home" options={{
               headerRight: (props) => (
-                <IconButton></IconButton>
+                <IconButton>
+
+                  icon={() => <Icon name="ios-log-in-outline" size={30} color="white" />}
+                  onPress={(a) => setProfileOpen(true)}
+
+                </IconButton>
               )
             }} children={() => <Home />} />
             <Tab.Screen
