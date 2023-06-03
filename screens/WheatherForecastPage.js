@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, FlatList } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, FlatList, Modal } from 'react-native';
 
-const WeatherForecastPage = () => {
+const WeatherForecastPage = ({visible, setVisible}) => {
   const dailyForecasts = [
     { day: 'Monday', temperature: '22°C' },
     { day: 'Tuesday', temperature: '25°C' },
@@ -18,9 +18,14 @@ const WeatherForecastPage = () => {
   );
 
   return (
+    <Modal
+      visible={visible}
+      onRequestClose={() => setVisible(false)}
+      animationType="fade"
+    >
     <View style={styles.container}>
       <ImageBackground
-        source={require('./background.jpg')} // Replace with your background image
+        source={require('../assets/splash.png')} // Replace with your background image
         style={styles.backgroundImage}
         resizeMode="cover"
       >
@@ -42,6 +47,7 @@ const WeatherForecastPage = () => {
         </View>
       </ImageBackground>
     </View>
+    </Modal>
   );
 };
 

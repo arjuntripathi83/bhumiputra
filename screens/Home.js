@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
+import WeatherForecastPage from './WheatherForecastPage';
 
 const Home = ({ navigation }) => {
   const [searchText, setSearchText] = useState('');
   const [isListening, setIsListening] = useState(false);
+
+  const [weatherOpen, setWeatherOpen] = useState(false);
 
   const startListening = async () => {
     setIsListening(true);
@@ -56,13 +59,14 @@ const Home = ({ navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
+      <WeatherForecastPage visible={weatherOpen} setVisible={setWeatherOpen} />
       <View style={styles.section}>
         <View style={styles.category}>
-          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
+          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/icons/equipments.png')} />
           <Text>Equipments</Text>
         </View>
         <View style={styles.category}>
-          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
+          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/icons/fertilizer.png')} />
           <Text>Equipments</Text>
         </View>
         <View style={styles.category}>
@@ -80,8 +84,10 @@ const Home = ({ navigation }) => {
           <Text>Equipments</Text>
         </View>
         <View style={styles.category}>
-          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
-          <Text>Equipments</Text>
+          <TouchableOpacity onPress={e => setWeatherOpen(true)}>
+          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/icons/weather.png')} />
+          <Text>Weather Forecast</Text>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.productSection}>
