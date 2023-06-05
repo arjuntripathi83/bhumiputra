@@ -60,6 +60,9 @@ const Home = ({ navigation }) => {
   return (
     <ScrollView style={styles.container}>
       <WeatherForecastPage visible={weatherOpen} setVisible={setWeatherOpen} />
+      <View>
+        <Text style={styles.logo}>BHUMIPUTRA</Text>
+      </View>
       <View style={styles.section}>
         <View style={styles.category}>
           <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/icons/equipments.png')} />
@@ -243,6 +246,13 @@ const styles = StyleSheet.create({
   categoryIcon: {
     width: '100%',
     height: '100%'
+
+  },
+  logo: {
+    fontSize: 50,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 16
 
   }
 });
