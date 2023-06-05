@@ -1,8 +1,27 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, TextInput, ImageBackground } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
 import WeatherForecastPage from './WheatherForecastPage';
+import { LinearGradient } from 'expo-linear-gradient';
+
+const BlockCard = ({ imgPath, text }) => {
+  return (
+    <ImageBackground
+      source={imgPath} // Replace with your background image
+      style={styles.blockBackground}
+      resizeMode="cover"
+    >
+      <LinearGradient
+        // Button Linear Gradient
+        colors={['#0000007a', '#00000054', '#00000094']}
+        style={styles.blockGradient}
+      >
+        <Text style={styles.blockText}>{text}</Text>
+      </LinearGradient>
+    </ImageBackground>
+  );
+}
 
 const Home = ({ navigation }) => {
   const [searchText, setSearchText] = useState('');
@@ -31,6 +50,24 @@ const Home = ({ navigation }) => {
   const onSpeechResults = (event) => {
     setSearchText(event.value[0]);
   };
+
+  // const blockCard = (imgPath, text) => {
+  //   return (
+  //     <ImageBackground
+  //       source={require(imgPath)} // Replace with your background image
+  //       style={styles.blockBackground}
+  //       resizeMode="cover"
+  //     >
+  //       <LinearGradient
+  //         // Button Linear Gradient
+  //         colors={['#0000007a', '#00000054', '#00000094']}
+  //         style={styles.blockGradient}
+  //       >
+  //         <Text style={styles.blockText}>{text}</Text>
+  //       </LinearGradient>
+  //     </ImageBackground>
+  //   );
+  // };
 
   const carouselItems = [
     {
@@ -65,34 +102,38 @@ const Home = ({ navigation }) => {
       </View>
       <View style={styles.section}>
         <View style={styles.category}>
-          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/icons/equipments.png')} />
+          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/equipments.png')} />
           <Text>Equipments</Text>
         </View>
         <View style={styles.category}>
-          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/icons/fertilizer.png')} />
+          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/fertilizer.png')} />
           <Text>Equipments</Text>
         </View>
         <View style={styles.category}>
-          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
+          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
           <Text>Equipments</Text>
         </View>
       </View>
       <View style={styles.section}>
         <View style={styles.category}>
-          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
+          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
           <Text>Equipments</Text>
         </View>
         <View style={styles.category}>
-          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
+          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
           <Text>Equipments</Text>
         </View>
         <View style={styles.category}>
-          <TouchableOpacity onPress={e => setWeatherOpen(true)}>
-          <Image resizeMode='contain' style={styles.categoryIcon} source={require('../assets/icons/weather.png')} />
-          <Text>Weather Forecast</Text>
+          <TouchableOpacity onPress={(e) => setWeatherOpen(true)}>
+            <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/weather.png')} />
+            <Text>Weather Forecast</Text>
           </TouchableOpacity>
         </View>
       </View>
+      <BlockCard imgPath={require('../assets/images/farming-equipment.jpg')} text={'Farming Equipments'} />
+      <BlockCard imgPath={require('../assets/images/farming-equipment.jpg')} text={'Farming Equipments'} />
+      <BlockCard imgPath={require('../assets/images/farming-equipment.jpg')} text={'Farming Equipments'} />
+      
       <View style={styles.productSection}>
         <TouchableOpacity
           onPress={() => {
@@ -241,19 +282,36 @@ const styles = StyleSheet.create({
     width: '20%',
     height: 100,
     // backgroundColor: 'skyblue',
-    borderRadius: 4,
+    borderRadius: 4
   },
   categoryIcon: {
     width: '100%',
     height: '100%'
-
   },
   logo: {
     fontSize: 50,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 16
-
+  },
+  blockGradient: {
+    height: 200,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    borderRadius: 20,
+    padding: 26
+  },
+  blockText: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center'
+  },
+  blockBackground: {
+    height: 200,
+    borderRadius: 20,
+    overflow: 'hidden',
+    marginBottom: 16
   }
 });
 
