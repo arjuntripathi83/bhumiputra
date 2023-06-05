@@ -51,23 +51,6 @@ const Home = ({ navigation }) => {
     setSearchText(event.value[0]);
   };
 
-  // const blockCard = (imgPath, text) => {
-  //   return (
-  //     <ImageBackground
-  //       source={require(imgPath)} // Replace with your background image
-  //       style={styles.blockBackground}
-  //       resizeMode="cover"
-  //     >
-  //       <LinearGradient
-  //         // Button Linear Gradient
-  //         colors={['#0000007a', '#00000054', '#00000094']}
-  //         style={styles.blockGradient}
-  //       >
-  //         <Text style={styles.blockText}>{text}</Text>
-  //       </LinearGradient>
-  //     </ImageBackground>
-  //   );
-  // };
 
   const carouselItems = [
     {
@@ -103,25 +86,25 @@ const Home = ({ navigation }) => {
       <View style={styles.section}>
         <View style={styles.category}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/equipments.png')} />
-          <Text style={styles.text}>Equipments</Text>
+          <Text style={styles.categoryText}>Equipments</Text>
         </View>
         <View style={styles.category}>
-          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/fertilizer icon.png')} />
-          <Text style={styles.text}>Equipments</Text>
+          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/fertilizer_icon.png')} />
+          <Text style={styles.categoryText}>Equipments</Text>
         </View>
         <View style={styles.category}>
-          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/Seeds icon.png')} />
-          <Text style={styles.text}>Equipments</Text>
+          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/seeds_icon.avif')} />
+          <Text style={styles.categoryText}>Equipments</Text>
         </View>
       </View>
       <View style={styles.section}>
         <View style={styles.category}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
-          <Text style={styles.text}>Equipments</Text>
+          <Text style={styles.categoryText}>Equipments</Text>
         </View>
         <View style={styles.category}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
-          <Text style={styles.text}>Equipments</Text>
+          <Text style={styles.categoryText}>Equipments</Text>
         </View>
         <View style={styles.category}>
           <TouchableOpacity onPress={(e) => setWeatherOpen(true)}>
@@ -131,8 +114,8 @@ const Home = ({ navigation }) => {
         </View>
       </View>
       <BlockCard imgPath={require('../assets/images/farming-equipment.jpg')} text={'Farming Equipments'} />
+      <BlockCard imgPath={require('../assets/images/Seeds.jpeg')} text={'Farming Seeds'} />
       <BlockCard imgPath={require('../assets/images/fertilizers.jpg')} text={'Fertilizers'} />
-      <BlockCard imgPath={require('../assets/images/Seeds.jpg')} text={'Farming Seeds'} />
       
 
       <View style={styles.productSection}>
@@ -275,14 +258,13 @@ const styles = StyleSheet.create({
   },
   section: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 16
+    marginVertical: 20
   },
   category: {
     width: '20%',
-    height: 100,
-    // backgroundColor: 'skyblue',
+    height: 80,
     borderRadius: 4
   },
   categoryIcon: {
@@ -315,10 +297,10 @@ const styles = StyleSheet.create({
     marginBottom: 16
   },
 
-  text: {
-    fontSize: 20,
+  categoryText: {
+    fontSize: 16,
     fontWeight: 'bold',
-    color: 'blue',
+    color: 'darkgreen',
     textAlign: 'center',
     marginBottom: 10,
   },
