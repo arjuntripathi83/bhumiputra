@@ -93,7 +93,7 @@ const Home = ({ navigation }) => {
           <Text style={styles.categoryText}>Equipments</Text>
         </View>
         <View style={styles.category}>
-          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/seeds.jpg')} />
+          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/seeds.png')} />
           <Text style={styles.categoryText}>Equipments</Text>
         </View>
       </View>
