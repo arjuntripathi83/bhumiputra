@@ -4,21 +4,21 @@ const ProductContext = createContext();
 
 export const ProductProvider = ({children}) => {
     
-    const cartItemsinSession = JSON.parse(localStorage.getItem('cartItems'));
+    // const cartItemsinSession = JSON.parse(localStorage.getItem('cartItems'));
 
-    const [cartItems, setCartItems] = useState(cartItemsinSession? cartItemsinSession : []);
+    const [cartItems, setCartItems] = useState([]);
 
-    useEffect(() => {
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    }, [cartItems])
+    // useEffect(() => {
+    //     localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    // }, [cartItems])
     
 
     const addItemToCart = (item) => {
-        const exist = cartItems.find((cartItem) => cartItem._id === item._id);
+        const exist = cartItems.find((cartItem) => cartItem.id === item.id);
         if (exist) {
             setCartItems(
                 cartItems.map((cartItem) =>
-                    cartItem._id === item._id ? { ...exist, quantity: exist.quantity + 1 } : cartItem
+                    cartItem.id === item.id ? { ...exist, quantity: exist.quantity + 1 } : cartItem
                 )
             );
             return;
@@ -30,14 +30,14 @@ export const ProductProvider = ({children}) => {
     };
 
     const removeItemFromCart = (item) => {
-        const exist = cartItems.find((cartItem) => cartItem._id === item._id);
+        const exist = cartItems.find((cartItem) => cartItem.id === item.id);
         if (exist.quantity === 1){
-            setCartItems(cartItems.filter((cartItem) => cartItem._id !== item._id));
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            setCartItems(cartItems.filter((cartItem) => cartItem.id !== item.id));
+            // localStorage.setItem('cartItems', JSON.stringify(cartItems));
         } else {
             setCartItems(
                 cartItems.map((cartItem) =>
-                    cartItem._id === item._id ? { ...exist, quantity: exist.quantity - 1 } : cartItem
+                    cartItem.id === item.id ? { ...exist, quantity: exist.quantity - 1 } : cartItem
                 )
             );
             // localStorage.setItem('cartItems', JSON.stringify(cartItems));
@@ -50,7 +50,7 @@ export const ProductProvider = ({children}) => {
     };
 
     const isInCart = (item) => {
-        return cartItems.find((cartItem) => cartItem._id === item._id);
+        return cartItems.find((cartItem) => cartItem.id === item.id);
     };
 
     const getCartTotal = () => {
