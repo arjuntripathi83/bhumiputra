@@ -103,25 +103,25 @@ const Home = ({ navigation }) => {
       <View style={styles.section}>
         <View style={styles.category}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/equipments.png')} />
-          <Text>Equipments</Text>
+          <Text style={styles.text}>Equipments</Text>
         </View>
         <View style={styles.category}>
-          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/fertilizer.png')} />
-          <Text>Equipments</Text>
+          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/fertilizer icon.png')} />
+          <Text style={styles.text}>Equipments</Text>
         </View>
         <View style={styles.category}>
-          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
-          <Text>Equipments</Text>
+          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/Seeds icon.png')} />
+          <Text style={styles.text}>Equipments</Text>
         </View>
       </View>
       <View style={styles.section}>
         <View style={styles.category}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
-          <Text>Equipments</Text>
+          <Text style={styles.text}>Equipments</Text>
         </View>
         <View style={styles.category}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
-          <Text>Equipments</Text>
+          <Text style={styles.text}>Equipments</Text>
         </View>
         <View style={styles.category}>
           <TouchableOpacity onPress={(e) => setWeatherOpen(true)}>
@@ -131,9 +131,10 @@ const Home = ({ navigation }) => {
         </View>
       </View>
       <BlockCard imgPath={require('../assets/images/farming-equipment.jpg')} text={'Farming Equipments'} />
-      <BlockCard imgPath={require('../assets/images/farming-equipment.jpg')} text={'Farming Equipments'} />
-      <BlockCard imgPath={require('../assets/images/farming-equipment.jpg')} text={'Farming Equipments'} />
+      <BlockCard imgPath={require('../assets/images/fertilizers.jpg')} text={'Fertilizers'} />
+      <BlockCard imgPath={require('../assets/images/Seeds.jpg')} text={'Farming Seeds'} />
       
+
       <View style={styles.productSection}>
         <TouchableOpacity
           onPress={() => {
@@ -312,7 +313,15 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: 'hidden',
     marginBottom: 16
-  }
+  },
+
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'blue',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
 });
 
 export default Home;
