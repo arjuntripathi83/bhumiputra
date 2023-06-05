@@ -81,7 +81,7 @@ const Home = ({ navigation }) => {
     <ScrollView style={styles.container}>
       <WeatherForecastPage visible={weatherOpen} setVisible={setWeatherOpen} />
       <View>
-        <Text style={styles.logo}>BHUMIPUTRA</Text>
+        <Text style={styles.logo}>FARMER TRADES</Text>
       </View>
       <View style={styles.section}>
         <View style={styles.category}>
@@ -93,7 +93,7 @@ const Home = ({ navigation }) => {
           <Text style={styles.categoryText}>Equipments</Text>
         </View>
         <View style={styles.category}>
-          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/seeds_icon.avif')} />
+          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/seeds.jpg')} />
           <Text style={styles.categoryText}>Equipments</Text>
         </View>
       </View>
@@ -113,8 +113,8 @@ const Home = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-      <BlockCard imgPath={require('../assets/images/farming-equipment.jpg')} text={'Farming Equipments'} />
-      <BlockCard imgPath={require('../assets/images/Seeds.jpeg')} text={'Farming Seeds'} />
+      <BlockCard imgPath={require('../assets/images/farming-equipment.jpg')} text={'Equipments'} />
+      <BlockCard imgPath={require('../assets/images/Seeds.jpeg')} text={'Seeds'} />
       <BlockCard imgPath={require('../assets/images/fertilizers.jpg')} text={'Fertilizers'} />
       
 
@@ -260,7 +260,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginVertical: 20
+    marginVertical: 20,
+  
   },
   category: {
     width: '20%',
@@ -272,7 +273,7 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   logo: {
-    fontSize: 50,
+    fontSize: 40,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 16
@@ -298,7 +299,7 @@ const styles = StyleSheet.create({
   },
 
   categoryText: {
-    fontSize: 16,
+    fontSize: 13,
     fontWeight: 'bold',
     color: 'darkgreen',
     textAlign: 'center',
