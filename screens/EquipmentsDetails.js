@@ -1,15 +1,16 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Modal, TouchableOpacity } from 'react-native';
-import { IconButton } from 'react-native-paper';
+import { Button, IconButton } from 'react-native-paper';
 import { Rating } from 'react-native-ratings';
 import useProductContext from '../context/ProductContext';
+import BadgeIconButton from './BadgeIconButton';
 
-const EquipmentsDetails = ({ equipmentData, visible, setVisible }) => {
+const EquipmentsDetails = ({ equipmentData, visible, setVisible, setCartOpen }) => {
   const ratingCompleted = (rating) => {
     console.log('Rating is: ' + rating);
   };
 
-  const { addItemToCart, getCartItemsCount } = useProductContext();
+  const { addItemToCart, getCartItemsCount, addToFavoriteList, isInFavoriteList, removeItemFromFavoriteList } = useProductContext();
 
   return (
     <Modal visible={visible} onRequestClose={() => setVisible(false)} animationType="slide">
@@ -18,14 +19,29 @@ const EquipmentsDetails = ({ equipmentData, visible, setVisible }) => {
           <IconButton icon="arrow-left" color="black" size={20} onPress={() => setVisible(false)} />
           <View style={styles.topRightButtons}>
             <IconButton icon="magnify" color="black" size={20} onPress={() => console.log('Search pressed')} />
-            <Text>{getCartItemsCount()}</Text>
-            <IconButton icon="cart" color="black" size={20} onPress={() => console.log('Cart pressed')} />
+            <BadgeIconButton
+
+              icon="cart"
+              badgeContent={getCartItemsCount()}
+              size={20}
+              onPress={() => {
+                setCartOpen(true);
+              }}
+            />
           </View>
         </View>
         <View>
-          <IconButton style={styles.favIcon} icon="heart" iconColor='red' size={30} onPress={() => console.log('Pressed')} />
-          <IconButton style={styles.shareIcon} icon="share-variant" iconColor='#fff' size={20} onPress={() => console.log('Share pressed')} />
-
+          <View style={styles.favIcon}>
+            <IconButton
+              onPressOut={isInFavoriteList(equipmentData.id) ? () => removeItemFromFavoriteList(equipmentData.id) : () => addToFavoriteList(equipmentData.obj)}
+              icon={isInFavoriteList(equipmentData.id) ? 'heart' : 'heart-outline'}
+              iconColor="red"
+              size={20}
+            />
+          </View>
+          <View style={styles.shareIcon}>
+            <IconButton icon="share-variant" iconColor="#000" size={20} onPress={() => console.log('Share pressed')} />
+          </View>
           <Image
             source={{
               uri: equipmentData.obj.Image
@@ -46,15 +62,16 @@ const EquipmentsDetails = ({ equipmentData, visible, setVisible }) => {
           <Text style={styles.productAvailability}>In Stock</Text>
           {/* Add other product details as needed */}
         </View>
-        <TouchableOpacity style={styles.addToCartButton} onPress={() => {
-          addItemToCart(equipmentData.obj);
-          // setVisible(false);
-        }}>
+        <Button
+          mode="contained"
+          // style={styles.addToCartButton}
+          onPress={() => {
+            addItemToCart(equipmentData.obj);
+            // setVisible(false);
+          }}
+        >
           <Text style={styles.addToCartButtonText}>Add to Cart</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.buyNowButton}>
-          <Text style={styles.buyNowButtonText}>Buy Now</Text>
-        </TouchableOpacity>
+        </Button>
       </View>
     </Modal>
   );
@@ -145,15 +162,19 @@ const styles = StyleSheet.create({
   },
   favIcon: {
     position: 'absolute',
-    top: 0,
-    right: 0,
-    zIndex: 1
+    top: 10,
+    right: 10,
+    zIndex: 1,
+    backgroundColor: '#fff',
+    borderRadius: 50
   },
   shareIcon: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    zIndex: 1
+    top: 10,
+    left: 10,
+    zIndex: 1,
+    backgroundColor: '#fff',
+    borderRadius: 50
   }
 });
 

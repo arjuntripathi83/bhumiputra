@@ -4,6 +4,8 @@ import { IconButton } from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
 import WeatherForecastPage from './WheatherForecastPage';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
+import Footer from './Footer';
 
 const BlockCard = ({ imgPath, text }) => {
   return (
@@ -21,11 +23,12 @@ const BlockCard = ({ imgPath, text }) => {
       </LinearGradient>
     </ImageBackground>
   );
-}
+};
 
-const Home = ({ navigation }) => {
+const Home = () => {
   const [searchText, setSearchText] = useState('');
   const [isListening, setIsListening] = useState(false);
+  const navigation = useNavigation();
 
   const [weatherOpen, setWeatherOpen] = useState(false);
 
@@ -50,7 +53,6 @@ const Home = ({ navigation }) => {
   const onSpeechResults = (event) => {
     setSearchText(event.value[0]);
   };
-
 
   const carouselItems = [
     {
@@ -84,96 +86,47 @@ const Home = ({ navigation }) => {
         <Text style={styles.logo}>FARMER TRADES</Text>
       </View>
       <View style={styles.section}>
-        <View style={styles.category}>
+        <TouchableOpacity style={styles.category} onPress={() => navigation.navigate('EquipmentBrowser')}>
+          {/* <View > */}
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/equipments.png')} />
           <Text style={styles.categoryText}>Equipments</Text>
-        </View>
-        <View style={styles.category}>
+          {/* </View> */}
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.category} onPress={() => navigation.navigate('FertilizerBrowser')}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/fertilizer_icon.png')} />
           <Text style={styles.categoryText}>Equipments</Text>
-        </View>
-        <View style={styles.category}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.category} onPress={() => navigation.navigate('Seedsbrowser')}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/seeds.png')} />
           <Text style={styles.categoryText}>Equipments</Text>
-        </View>
-      </View>
-      <View style={styles.section}>
-        <View style={styles.category}>
-          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
-          <Text style={styles.categoryText}>Equipments</Text>
-        </View>
-        <View style={styles.category}>
-          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
-          <Text style={styles.categoryText}>Equipments</Text>
-        </View>
-        <View style={styles.category}>
-          <TouchableOpacity onPress={(e) => setWeatherOpen(true)}>
-            <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/weather.png')} />
-            <Text>Weather Forecast</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <BlockCard imgPath={require('../assets/images/farming-equipment.jpg')} text={'Equipments'} />
-      <BlockCard imgPath={require('../assets/images/Seeds.jpeg')} text={'Seeds'} />
-      <BlockCard imgPath={require('../assets/images/fertilizers.jpg')} text={'Fertilizers'} />
-      
-
-      <View style={styles.productSection}>
-        <TouchableOpacity
-          onPress={() => {
-            console.log('Product 1 pressed');
-            navigation.navigate('Equipmentsbrowser');
-          }}
-        >
-          <View style={styles.productContainer}>
-            <Image
-              source={{
-                uri: 'https://th.bing.com/th/id/OIP.qdhvxg0dnLQrzX_SL1GkHgHaEK?pid=ImgDet&rs=1'
-              }}
-              style={styles.productImage}
-            />
-            <Text style={styles.productTitle}>Product 1</Text>
-          </View>
         </TouchableOpacity>
       </View>
-      <View style={styles.productSection}>
-        <View style={styles.productContainer}>
-          <Image
-            source={{
-              uri: 'https://dealernet.s3.amazonaws.com/webres/john-deere-images/dh11-series-disk-harrows.jpg'
-            }}
-            style={styles.productImage}
-          />
-          <Text style={styles.productTitle}>Product 2</Text>
-        </View>
+      <View style={styles.section}>
+        <TouchableOpacity style={styles.category} onPress={() => navigation.navigate('EquipmentBrowser')}>
+          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
+          <Text style={styles.categoryText}>Equipments</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.category} onPress={() => navigation.navigate('EquipmentBrowser')}>
+          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
+          <Text style={styles.categoryText}>Equipments</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.category} onPress={(e) => setWeatherOpen(true)}>
+          <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/weather.png')} />
+          <Text>Weather Forecast</Text>
+        </TouchableOpacity>
       </View>
-      {/* Add more product containers as needed */}
-      <TouchableOpacity style={styles.topItemsButton} onPress={() => console.log('Top Items pressed')}>
-        <Text style={styles.topItemsButtonText}>Top Items</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('EquipmentBrowser')}>
+        <BlockCard imgPath={require('../assets/images/farming-equipment.jpg')} text={'Equipments'} />
       </TouchableOpacity>
-      <View style={styles.productSection}>
-        <View style={styles.productContainer}>
-          <Image
-            source={{
-              uri: 'https://th.bing.com/th/id/R.e05f7ef9a31625cb96ab5497abbdc6dd?rik=PpdnCu6JV1Mv2Q&riu=http%3a%2f%2fwww.tractordata.com%2fnews%2f2013%2f08%2fdeere-7290r.jpg&ehk=hGKheqkr36qzYaJ8D8barHQMjPcIPDHIqNmbKITugzM%3d&risl=&pid=ImgRaw&r=0'
-            }}
-            style={styles.productImage}
-          />
-          <Text style={styles.productTitle}>Product 1</Text>
-        </View>
-      </View>
-      <View style={styles.productSection}>
-        <View style={styles.productContainer}>
-          <Image
-            source={{
-              uri: 'https://th.bing.com/th/id/OIP.h0uYaJhddxcqt0s7jSAmOAHaJe?pid=ImgDet&rs=1'
-            }}
-            style={styles.productImage}
-          />
-          <Text style={styles.productTitle}>Product 2</Text>
-        </View>
-      </View>
-      {/* Add more product containers as needed */}
+
+      <TouchableOpacity onPress={() => navigation.navigate('Seedsbrowser')}>
+        <BlockCard imgPath={require('../assets/images/Seeds.jpeg')} text={'Seeds'} />
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate('FertilizerBrowser')}>
+        <BlockCard imgPath={require('../assets/images/fertilizers.jpg')} text={'Fertilizers'} />
+      </TouchableOpacity>
+      <Footer />
     </ScrollView>
   );
 };
@@ -260,8 +213,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginVertical: 20,
-  
+    marginVertical: 20
   },
   category: {
     width: '20%',
@@ -303,8 +255,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'darkgreen',
     textAlign: 'center',
-    marginBottom: 10,
-  },
+    marginBottom: 10
+  }
 });
 
 export default Home;

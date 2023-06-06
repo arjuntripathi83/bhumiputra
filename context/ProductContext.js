@@ -7,6 +7,9 @@ export const ProductProvider = ({children}) => {
     // const cartItemsinSession = JSON.parse(localStorage.getItem('cartItems'));
 
     const [cartItems, setCartItems] = useState([]);
+    const [favoriteList, setFavoriteList] = useState([]);
+
+    const [cartOpen, setCartOpen] = useState(false);
 
     // useEffect(() => {
     //     localStorage.setItem('cartItems', JSON.stringify(cartItems));
@@ -29,6 +32,20 @@ export const ProductProvider = ({children}) => {
 
     };
 
+    const addToFavoriteList = (item) => {
+        const exist = favoriteList.find((favoriteItem) => favoriteItem.id === item.id);
+        if (exist) {
+            setFavoriteList(
+                favoriteList.map((favoriteItem) =>
+                    favoriteItem.id === item.id ? { ...exist, quantity: exist.quantity + 1 } : favoriteItem
+                )
+            );
+            return;
+
+        }
+        setFavoriteList([...favoriteList, { ...item, quantity: 1 }]);
+    }
+
     const removeItemFromCart = (item) => {
         const exist = cartItems.find((cartItem) => cartItem.id === item.id);
         if (exist.quantity === 1){
@@ -44,6 +61,23 @@ export const ProductProvider = ({children}) => {
         }
     };
 
+    const removeItemFromFavoriteList = (item) => {
+        const exist = favoriteList.find((favoriteItem) => favoriteItem.id === item.id);
+        if (exist.quantity === 1){
+            setFavoriteList(favoriteList.filter((favoriteItem) => favoriteItem.id !== item.id));
+        } else {
+            setFavoriteList(
+                favoriteList.map((favoriteItem) =>
+                    favoriteItem.id === item.id ? { ...exist, quantity: exist.quantity - 1 } : favoriteItem
+                )
+            );
+        }
+    }
+
+    const isInFavoriteList = (item) => {
+        return favoriteList.find((favoriteItem) => favoriteItem.id === item.id);
+    }
+
     const clearCart = () => {
         setCartItems([]);
         // localStorage.setItem('cartItems', JSON.stringify(cartItems));
@@ -54,7 +88,7 @@ export const ProductProvider = ({children}) => {
     };
 
     const getCartTotal = () => {
-        return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+        return cartItems.reduce((acc, item) => acc + item.Price * item.quantity, 0);
     };
 
     const getCartItemsCount = () => {
@@ -69,7 +103,13 @@ export const ProductProvider = ({children}) => {
             clearCart,
             isInCart,
             getCartTotal,
-            getCartItemsCount
+            getCartItemsCount,
+            favoriteList,
+            addToFavoriteList,
+            removeItemFromFavoriteList,
+            isInFavoriteList,
+            cartOpen, setCartOpen
+
         }}>
         {children}
         </ProductContext.Provider>

@@ -15,11 +15,13 @@ import { Button, IconButton, TouchableOpacity } from "react-native-paper";
 import EquipmentsDetails from "./EquipmentsDetails";
 import Carousel from "react-native-snap-carousel";
 
-const Equipmentsbrowser = () => {
+const Equipmentsbrowser = ({navigation, setCartOpen}) => {
   const [equipmentList, setEquipmentList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [isListening, setIsListening] = useState(false);
+
+  const [masterList, setMasterList] = useState([]);
 
   const [selEquipment, setSelEquipment] = useState(null);
 
@@ -65,6 +67,7 @@ const Equipmentsbrowser = () => {
       }));
       console.log(data);
       setEquipmentList(data);
+      setMasterList(data);
       setLoading(false);
     });
   };
@@ -72,6 +75,13 @@ const Equipmentsbrowser = () => {
   useEffect(() => {
     fetchEquipmentData();
   }, []);
+
+  const filterEquipmentsByName = (text) => {
+    const filteredList = masterList.filter((item) =>
+      item.obj.Title.includes(text)
+    );
+    setEquipmentList(filteredList);
+  }
 
   const showProducts = () => {
     return (
@@ -82,10 +92,13 @@ const Equipmentsbrowser = () => {
               source={{ uri: item.obj.Image }}
               style={styles.productImage}
             />
-            <Text>{item.obj.Title}</Text>
-            <Text>{item.obj.Price}</Text>
-            <Text>{item.obj.Description}</Text>
+            <Text style={styles.title}>{item.obj.Title}</Text>
+            <Text style={styles.price}>₹{item.obj.Price}</Text>
+            <Text style={styles.description}>{item.obj.Description}</Text>
             <Button
+
+            mode="contained"
+            style={{ marginTop: 16 }}
               onPress={(e) => {
                 setViewModal(true);
                 setSelEquipment(item);
@@ -116,8 +129,8 @@ const Equipmentsbrowser = () => {
             />
             <TextInput
               style={styles.searchText}
-              value={searchText}
-              onChangeText={setSearchText}
+              // value={searchText}
+              onChangeText={text => filterEquipmentsByName(text)}
               placeholder="Search by product, brand & more..."
             />
             <IconButton
@@ -148,7 +161,9 @@ const Equipmentsbrowser = () => {
           equipmentData={selEquipment}
           app={app}
           visible={viewModal}
+          setCartOpen={setCartOpen}
           setVisible={setViewModal}
+
         />
       )}
     </View>
@@ -195,8 +210,23 @@ const styles = StyleSheet.create({
   },
   cateBtn: {
     marginHorizontal: 4,
-  
-  }
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginTop: 16,
+
+  },
+  price: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginTop: 8,
+  },
+  description: {
+    fontSize: 16,
+    marginTop: 8,
+  },
+
 });
 
 export default Equipmentsbrowser;

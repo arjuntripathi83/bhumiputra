@@ -14,7 +14,8 @@ import { IconButton } from 'react-native-paper';
 import { UserProvider } from './context/UserContext';
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { ProductProvider } from './context/ProductContext';
+import useProductContext, { ProductProvider } from './context/ProductContext';
+import CartPage from './screens/CartPage';
 
 export default function App() {
   const Tab = createBottomTabNavigator();
@@ -23,10 +24,14 @@ export default function App() {
 
   const [LoginOpen, setLoginOpen] = useState(false);
 
+  const [cartOpen, setCartOpen] = useState(false);
+
   return (
     <ProductProvider>
       <SafeAreaView style={{ flex: 1 }}>
         <Profile visible={profileOpen} setVisible={setProfileOpen} />
+        <CartPage visible={cartOpen} setVisible={setCartOpen} />
+
 
         <UserProvider>
           <NavigationContainer>
@@ -69,7 +74,7 @@ export default function App() {
               />
               <Tab.Screen
                 name="EquipmentBrowser"
-                children={() => <Equipmentsbrowser />}
+                children={() => <Equipmentsbrowser setCartOpen={setCartOpen} />}
                 options={{
                   headerRight: (props) => (
                     <TouchableOpacity onPress={(e) => setProfileOpen(true)}>
