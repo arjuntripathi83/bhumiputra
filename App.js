@@ -8,7 +8,6 @@ import IonicIcon from 'react-native-vector-icons/Ionicons';
 import Home from './screens/Home';
 import Equipmentsbrowser from './screens/Equipmentsbrowser';
 import Profile from './screens/Profile';
-import Fertilizersbrowser from './screens/Fertilizersbrowser';
 import Seedsbrowser from './screens/Seedsbrowser';
 import { IconButton } from 'react-native-paper';
 import { UserProvider } from './context/UserContext';
@@ -16,6 +15,7 @@ import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import useProductContext, { ProductProvider } from './context/ProductContext';
 import CartPage from './screens/CartPage';
+import FertilizersBrowser from './screens/FertilizersBrowser';
 
 export default function App() {
   const Tab = createBottomTabNavigator();
@@ -92,7 +92,7 @@ export default function App() {
                   )
                 }}
               />
-              <Tab.Screen name="FertilizerBrowser" children={() => <Fertilizersbrowser />} />
+              <Tab.Screen name="FertilizerBrowser" children={() => <FertilizersBrowser />} />
               <Tab.Screen name="Seedsbrowser" children={() => <Seedsbrowser />} />
             </Tab.Navigator>
           </NavigationContainer>

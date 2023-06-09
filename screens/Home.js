@@ -104,11 +104,11 @@ const Home = () => {
       <View style={styles.section}>
         <TouchableOpacity style={styles.category} onPress={() => navigation.navigate('EquipmentBrowser')}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
-          <Text style={styles.categoryText}>Equipments</Text>
+          <Text style={styles.categoryText}>Rental</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.category} onPress={() => navigation.navigate('EquipmentBrowser')}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/images/equipment-category.png')} />
-          <Text style={styles.categoryText}>Equipments</Text>
+          <Text style={styles.categoryText}>Cold storages'</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.category} onPress={(e) => setWeatherOpen(true)}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/weather.png')} />
