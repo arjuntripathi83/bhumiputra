@@ -83,7 +83,7 @@ const Home = () => {
     <ScrollView style={styles.container}>
       <WeatherForecastPage visible={weatherOpen} setVisible={setWeatherOpen} />
       <View>
-        <Text style={styles.logo}>FARMER TRADES</Text>
+        <Text style={styles.logo}>FARM TRADES</Text>
       </View>
       <View style={styles.section}>
         <TouchableOpacity style={styles.category} onPress={() => navigation.navigate('EquipmentBrowser')}>
@@ -94,11 +94,11 @@ const Home = () => {
         </TouchableOpacity>
         <TouchableOpacity style={styles.category} onPress={() => navigation.navigate('FertilizerBrowser')}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/fertilizer_icon.png')} />
-          <Text style={styles.categoryText}>Equipments</Text>
+          <Text style={styles.categoryText}>Fertilizers</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.category} onPress={() => navigation.navigate('Seedsbrowser')}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/seeds.png')} />
-          <Text style={styles.categoryText}>Equipments</Text>
+          <Text style={styles.categoryText}>Seeds</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.section}>
@@ -112,7 +112,7 @@ const Home = () => {
         </TouchableOpacity>
         <TouchableOpacity style={styles.category} onPress={(e) => setWeatherOpen(true)}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/weather.png')} />
-          <Text>Weather Forecast</Text>
+          <Text style={styles.categoryText}>Weathe Forecast</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={() => navigation.navigate('EquipmentBrowser')}>
