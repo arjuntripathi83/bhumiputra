@@ -83,7 +83,7 @@ const Home = () => {
     <ScrollView style={styles.container}>
       <WeatherForecastPage visible={weatherOpen} setVisible={setWeatherOpen} />
       <View>
-        <Text style={styles.logo}>FARM TRADES</Text>
+        <Text style={styles.logo}>FARM TRADE</Text>
       </View>
       <View style={styles.section}>
         <TouchableOpacity style={styles.category} onPress={() => navigation.navigate('EquipmentBrowser')}>
