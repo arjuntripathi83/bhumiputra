@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import useProductContext, { ProductProvider } from './context/ProductContext';
 import CartPage from './screens/CartPage';
-import FertilizersBrowser from './screens/FertilizersBrowser';
+import FertilizersBrowser from '/screens/FertilizersBrowser';
 
 export default function App() {
   const Tab = createBottomTabNavigator();
