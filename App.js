@@ -15,7 +15,9 @@ import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import useProductContext, { ProductProvider } from './context/ProductContext';
 import CartPage from './screens/CartPage';
-import FertilizersBrowser from '/screens/FertilizersBrowser';
+import FertilizersBrowser from './screens/FertilizerBrowser';
+import RentalEquipmentPage from './screens/RentalEquipmentPage';
+import ColdStoragePage from './screens/ColdStoragePage';
 
 export default function App() {
   const Tab = createBottomTabNavigator();
@@ -94,6 +96,7 @@ export default function App() {
               />
               <Tab.Screen name="FertilizerBrowser" children={() => <FertilizersBrowser />} />
               <Tab.Screen name="Seedsbrowser" children={() => <Seedsbrowser />} />
+              <Tab.Screen name="ColdStorage" children={() => <ColdStoragePage />} />
             </Tab.Navigator>
           </NavigationContainer>
         </UserProvider>

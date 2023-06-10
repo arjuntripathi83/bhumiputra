@@ -80,6 +80,17 @@ const Seedsbrowser = ({ setCartOpen }) => {
     );
   };
 
+  const categoryOptions = [
+    "Tractors",
+    "Harvesters",
+    "Cultivators",
+    "Ploughs",
+    "Seeders",
+    "Sprayers",
+  ];
+
+  const [selCategory, setSelCategory] = useState(null);
+
   const startListening = async () => {
     setIsListening(true);
     try {
@@ -125,6 +136,18 @@ const Seedsbrowser = ({ setCartOpen }) => {
               onPress={isListening ? stopListening : startListening}
             />
           </View>
+        </View>
+        <View style={styles.categoryContainer}>
+          <FlatList
+            data={categoryOptions}
+            renderItem={({ item }) => (
+              <Button style={styles.cateBtn} mode={selCategory === item ? "contained" : 'outlined'} onPress={e => filterByCategory(item)}>
+                {item}
+              </Button>
+            )}
+            keyExtractor={(item) => item}
+            horizontal={true}
+          />
         </View>
       </View>
       <ScrollView style={styles.body}>{showProducts()}</ScrollView>
