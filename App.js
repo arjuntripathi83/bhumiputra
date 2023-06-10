@@ -36,11 +36,12 @@ export default function App() {
       <SafeAreaView style={{ flex: 1 }}>
         <Profile visible={profileOpen} setVisible={setProfileOpen} />
         <CartPage visible={cartOpen} setVisible={setCartOpen} />
-        <Login visible={LoginOpen} setVisible={setLoginOpen} />
         
 
         <UserProvider>
           <NavigationContainer>
+          <Login visible={LoginOpen} setVisible={setLoginOpen} />
+        
             <Tab.Navigator
               screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, size }) => {
