@@ -3,7 +3,7 @@ import React from "react";
 import { Button, Modal, StyleSheet, Text, View } from "react-native";
 import { Card, TextInput } from "react-native-paper";
 import { useNavigation } from '@react-navigation/native';
-const Login = ({ isVisible = true, setVisible = () => {} }) => {
+const Login = ({ isVisible, setVisible }) => {
 
   const loginData = {
     email: "user@mail.com",
@@ -17,7 +17,7 @@ const Login = ({ isVisible = true, setVisible = () => {} }) => {
     if(formdata.email === loginData.email && formdata.password === loginData.password){
       alert("Login Success");
       setVisible(false);
-      navigation.navigate('EquipmentBrowser')
+      // navigation.navigate('Home')
     }else{
       alert("Login Failed");
     }

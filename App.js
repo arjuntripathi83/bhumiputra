@@ -40,7 +40,7 @@ export default function App() {
 
         <UserProvider>
           <NavigationContainer>
-          <Login visible={LoginOpen} setVisible={setLoginOpen} />
+            {LoginOpen && <Login visible={LoginOpen} setVisible={setLoginOpen} />}
         
             <Tab.Navigator
               screenOptions={({ route }) => ({
