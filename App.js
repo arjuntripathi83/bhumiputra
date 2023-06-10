@@ -18,6 +18,7 @@ import CartPage from './screens/CartPage';
 import FertilizersBrowser from './screens/FertilizerBrowser';
 import RentalEquipmentPage from './screens/RentalEquipmentPage';
 import ColdStoragePage from './screens/ColdStoragePage';
+import Login from './screens/Login';
 
 export default function App() {
   const Tab = createBottomTabNavigator();
@@ -28,12 +29,15 @@ export default function App() {
 
   const [cartOpen, setCartOpen] = useState(false);
 
+  const {userData, setUserData} = useState(false);
+
   return (
     <ProductProvider>
       <SafeAreaView style={{ flex: 1 }}>
         <Profile visible={profileOpen} setVisible={setProfileOpen} />
         <CartPage visible={cartOpen} setVisible={setCartOpen} />
-
+        <Login visible={LoginOpen} setVisible={setLoginOpen} />
+        
 
         <UserProvider>
           <NavigationContainer>
@@ -68,10 +72,9 @@ export default function App() {
                 name="Home"
                 options={{
                   headerRight: (props) => (
-                    <IconButton>
-                      icon={() => <Icon name="ios-log-in-outline" size={30} color="white" />}
-                      onPress={(a) => setProfileOpen(true)}
-                    </IconButton>
+                    <TouchableOpacity onPress={e => setLoginOpen(true)}>
+                      <Image style={{width: 50, height: 50}} source={{uri: 'https://cdn-icons-png.flaticon.com/256/3135/3135715.png'}} />
+                    </TouchableOpacity>
                   )
                 }}
                 children={(props) => <Home />}

@@ -4,9 +4,20 @@ import { Button, Modal, StyleSheet, Text, View } from "react-native";
 import { Card, TextInput } from "react-native-paper";
 
 const Login = ({ isVisible = true, setVisible = () => {} }) => {
+
+  const loginData = {
+    email: "user@mail.com",
+    password: "123456",
+  }
+
   const onFormSubmit = (formdata) => {
     console.log(formdata);
-  };
+    if(formdata.email === loginData.email && formdata.password === loginData.password){
+      alert("Login Success");
+    }else{
+      alert("Login Failed");
+    }
+    };
 
   return (
     <Modal
