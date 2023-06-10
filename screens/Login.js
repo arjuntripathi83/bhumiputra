@@ -10,10 +10,14 @@ const Login = ({ isVisible = true, setVisible = () => {} }) => {
     password: "123456",
   }
 
+  const navigation = useNavigation();
+
   const onFormSubmit = (formdata) => {
     console.log(formdata);
     if(formdata.email === loginData.email && formdata.password === loginData.password){
       alert("Login Success");
+      setVisible(false);
+      navigation.navigate('EquipmentBrowser')
     }else{
       alert("Login Failed");
     }
