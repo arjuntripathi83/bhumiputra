@@ -112,7 +112,7 @@ const Home = () => {
         </TouchableOpacity>
         <TouchableOpacity style={styles.category} onPress={(e) => setWeatherOpen(true)}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/weather.png')} />
-          <Text>Weather Forecast</Text>
+          <Text style={styles.categoryText}>Weathe Forecast</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={() => navigation.navigate('EquipmentBrowser')}>
