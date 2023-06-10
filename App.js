@@ -56,6 +56,8 @@ export default function App() {
                     // return <Image source={require('./assets/icons/equipment.png')} style={{width: 24, height: 24}} />
                   } else if (route.name === 'Register') {
                     iconName = 'user';
+                  } else if (route.name === 'ColdStorage') {
+                    iconName = focused ? 'archive' : 'archive-outline';
                   }
 
                   return <IonicIcon name={iconName} size={size} color={color} />;

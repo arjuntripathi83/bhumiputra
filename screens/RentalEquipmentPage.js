@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import app from '../firebaseConfig';
 
-const RentalEquipmentPage = () => {
-  const [equipments, setEquipments] = useState([]);
+const RentalEquipmentPage = ({visible, setVisible}) => {
+  const [equipmentList, setEquipmentList] = useState([]);
 
   useEffect(() => {
-    // Initialize Firebase
-    if (!firebase.apps.length) {
-      const firebaseConfig = {
-        // Your Firebase configuration
-      };
-      firebase.initializeApp(firebaseConfig);
-    }
+    fetchEquipmentData();
+  }, [])
+  
 
-    // Fetch rental equipments from Firebase
-    fetchEquipments();
-  }, []);
-
-  const fetchEquipments = async () => {
-    try {
-      const snapshot = await firebase.firestore().collection('equipments').get();
-      const data = snapshot.docs.map((doc) => doc.data());
-      setEquipments(data);
-    } catch (error) {
-      console.error('Error fetching equipments:', error);
-    }
+  const fetchEquipmentData = () => {
+    // setLoading(true);
+    const db = getFirestore(app);
+    const ref = collection(db, "Equipments");
+    getDocs(ref).then((snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        obj: doc.data(),
+      }));
+      console.log(data);
+      setEquipmentList(data);
+      // setMasterList(data);
+      // setLoading(false);
+    });
   };
 
   const renderEquipmentItem = ({ item }) => (
@@ -42,14 +42,16 @@ const RentalEquipmentPage = () => {
   };
 
   return (
+    <Modal visible={visible} onRequestClose={() => setVisible(false)} animationType="slide">
     <View style={styles.container}>
       <Text style={styles.title}>Rental Equipment</Text>
       <FlatList
-        data={equipments}
+        data={equipmentList}
         renderItem={renderEquipmentItem}
         keyExtractor={(item) => item.id.toString()}
       />
     </View>
+    </Modal>
   );
 };
 

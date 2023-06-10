@@ -147,7 +147,7 @@ const FertilizersBrowser = ({ navigation, setCartOpen }) => {
       <ScrollView style={styles.body}>{showProducts()}</ScrollView>
       {selFertilizer && (
         <FertilizersDetails
-          FertilizerData={selFertilizer}
+          fertilizerData={selFertilizer}
           app={app}
           visible={viewModal}
           setCartOpen={setCartOpen}

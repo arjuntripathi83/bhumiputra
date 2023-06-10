@@ -6,6 +6,7 @@ import WeatherForecastPage from './WheatherForecastPage';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import Footer from './Footer';
+import RentalEquipmentPage from './RentalEquipmentPage';
 
 const BlockCard = ({ imgPath, text }) => {
   return (
@@ -28,6 +29,7 @@ const BlockCard = ({ imgPath, text }) => {
 const Home = () => {
   const [searchText, setSearchText] = useState('');
   const [isListening, setIsListening] = useState(false);
+  const [rentalOpen, setRentalOpen] = useState(false);
   const navigation = useNavigation();
 
   const [weatherOpen, setWeatherOpen] = useState(false);
@@ -82,6 +84,7 @@ const Home = () => {
   return (
     <ScrollView style={styles.container}>
       <WeatherForecastPage visible={weatherOpen} setVisible={setWeatherOpen} />
+      <RentalEquipmentPage visible={rentalOpen} setVisible={setRentalOpen} />
       <View>
         <Text style={styles.logo}>FARM TRADE</Text>
       </View>
@@ -102,7 +105,7 @@ const Home = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.section}>
-        <TouchableOpacity style={styles.category} onPress={() => navigation.navigate('EquipmentBrowser')}>
+        <TouchableOpacity style={styles.category} onPress={() => setRentalOpen(true)}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/real-estate.png')} />
           <Text style={styles.categoryText}>Rental</Text>
         </TouchableOpacity>
