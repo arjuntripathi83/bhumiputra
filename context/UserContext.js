@@ -7,7 +7,6 @@ export const UserProvider = ({ children }) => {
 
     const [profileOpen, setProfileOpen] = useState(false);
 
-
     const [userData, setUserData] = useState([]);
 
     return (
