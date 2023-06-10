@@ -39,12 +39,12 @@ const FertilizersBrowser = ({ navigation, setCartOpen }) => {
   };
 
   const categoryOptions = [
-    "Tractors",
-    "Harvesters",
-    "Cultivators",
-    "Ploughs",
-    "Seeders",
-    "Sprayers",
+    "Composter",
+    "Zincoz",
+    "Paddy microbes",
+    "Vanproz Super",
+    "Azospiriloz",
+    "Rhizoz",
   ];
 
   const [selCategory, setSelCategory] = useState(null);

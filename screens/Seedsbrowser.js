@@ -81,12 +81,12 @@ const Seedsbrowser = ({ setCartOpen }) => {
   };
 
   const categoryOptions = [
-    "Tractors",
-    "Harvesters",
-    "Cultivators",
-    "Ploughs",
-    "Seeders",
-    "Sprayers",
+    "Mustard",
+    "Cauliflower",
+    "Chilli",
+    "Cabbage",
+    "Ladyfinger",
+    "Radish",
   ];
 
   const [selCategory, setSelCategory] = useState(null);
