@@ -1,95 +1,168 @@
-// import React from 'react'
-// import { StyleSheet, Text, View } from 'react-native'
+import React from 'react';
+import { View, Text, TouchableOpacity, Modal, StyleSheet, Image } from 'react-native';
+import { Card, TextInput } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+import { Formik } from 'formik';
 
-// const Signup = () => {
-//   return (
-//     <View>
-//         <Text style={styles.title}>Signup Page</Text>
-//     </View>
-//   )
-// }
+const Signup = ({ isVisible, setVisible }) => {
+  const signupData = {
+    email: '',
+    password: '',
+    confirmPassword: '',
+  };
 
-// const styles = StyleSheet.create({
-//     title : {
-//         fontSize: 20,
-//         fontWeight: 'bold',
-//     }
-// })
+  const navigation = useNavigation();
 
-// export default Signup
+  const onFormSubmit = (formData) => {
+    console.log(formData);
+    // Add logic to process the sign-up data
+    if (formData.password === formData.confirmPassword) {
+      alert('Sign Up Success');
+      setVisible(false);
+      // navigation.navigate('Home');
+    } else {
+      alert('Passwords do not match');
+    }
+  };
 
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+  const goBack = () => {
+    setVisible(false);
+  };
 
-const SignupPage = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSignup = () => {
-    // Implement your signup logic here
-    console.log('Signup:', name, email, password);
+  const goToLogin = () => {
+    // Navigation logic to the login screen
+    console.log('Navigating to Login');
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Sign Up</Text>
-      <TextInput
-        placeholder="Name"
-        style={styles.input}
-        value={name}
-        onChangeText={setName}
-      />
-      <TextInput
-        placeholder="Email"
-        style={styles.input}
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-      />
-      <TextInput
-        placeholder="Password"
-        style={styles.input}
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <TouchableOpacity style={styles.signupButton} onPress={handleSignup}>
-        <Text style={styles.signupButtonText}>Sign Up</Text>
-      </TouchableOpacity>
-    </View>
+    <Modal
+      visible={isVisible}
+      animationType="slide"
+      hardwareAccelerated={true}
+      onRequestClose={goBack}
+    >
+      <View style={styles.container}>
+        <Image source={require('../assets/icons/leaves.jpg')} style={styles.backgroundImage} />
+        <View style={styles.logoContainer}>
+          <Image source={require('../assets/icons/seeds.png')} style={styles.logo} />
+        </View>
+        <Text style={[styles.formTitle, { color: 'white' }]}>Sign Up</Text>
+        <Card style={styles.card}>
+          <Formik initialValues={signupData} onSubmit={onFormSubmit}>
+            {({ handleChange, handleBlur, handleSubmit, values }) => (
+              <>
+                <TextInput
+                  style={styles.inputBox}
+                  label="Email"
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  value={values.email}
+                  placeholder="Enter Email"
+                />
+                <TextInput
+                  style={styles.inputBox}
+                  label="Password"
+                  secureTextEntry={true}
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  value={values.password}
+                  placeholder="Enter Password"
+                />
+                <TextInput
+                  style={styles.inputBox}
+                  label="Confirm Password"
+                  secureTextEntry={true}
+                  onChangeText={handleChange('confirmPassword')}
+                  onBlur={handleBlur('confirmPassword')}
+                  value={values.confirmPassword}
+                  placeholder="Confirm Password"
+                />
+                <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+                  <Text style={styles.submitButtonText}>Sign Up</Text>
+                </TouchableOpacity>
+              </>
+            )}
+          </Formik>
+          <TouchableOpacity style={styles.loginButton} onPress={goToLogin}>
+            <Text style={styles.loginButtonText}>Login</Text>
+          </TouchableOpacity>
+        </Card>
+        <TouchableOpacity style={styles.backButton} onPress={goBack}>
+          <Image source={require('../assets/icons/left-arrow.png')} style={styles.backButtonImage} />
+        </TouchableOpacity>
+      </View>
+    </Modal>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F9F9F9',
   },
-  title: {
-    fontSize: 24,
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+  logoContainer: {
+    marginBottom: 20,
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+  },
+  formTitle: {
+    fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 20,
   },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 20,
-    paddingHorizontal: 10,
+  card: {
+    backgroundColor: 'white',
+    width: 300,
+    padding: 20,
+    borderRadius: 10,
   },
-  signupButton: {
-    backgroundColor: 'blue',
-    paddingVertical: 15,
+  inputBox: {
+    marginBottom: 20,
+  },
+  submitButton: {
+    backgroundColor: '#333',
+    paddingVertical: 10,
     borderRadius: 5,
   },
-  signupButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
+  submitButtonText: {
+    color: 'white',
     textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  loginButton: {
+    backgroundColor: '#333',
+    marginTop: 10,
+    paddingVertical: 10,
+    borderRadius: 5,
+  },
+  loginButtonText: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    padding: 10,
+  },
+  backButtonImage: {
+    width: 20,
+    height: 20,
+    tintColor: 'white',
   },
 });
 
-export default SignupPage;
+export default Signup;

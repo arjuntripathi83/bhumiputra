@@ -16,7 +16,7 @@ const EquipmentsDetails = ({ equipmentData, visible, setVisible, setCartOpen }) 
     <Modal visible={visible} onRequestClose={() => setVisible(false)} animationType="slide">
       <View style={styles.container}>
         <View style={styles.topBar}>
-          <IconButton icon="arrow-left" color="black" size={20} onPress={() => setVisible(false)} />
+          <IconButton icon="arrow-left" color="black" size={28} onPress={() => setVisible(false)} />
           <View style={styles.topRightButtons}>
             <IconButton icon="magnify" color="black" size={20} onPress={() => console.log('Search pressed')} />
             <BadgeIconButton

@@ -28,7 +28,7 @@ const FertilizersDetails = ({
           <IconButton
             icon="arrow-left"
             color="black"
-            size={20}
+            size={28}
             onPress={() => setVisible(false)}
           />
           <View style={styles.topRightButtons}>

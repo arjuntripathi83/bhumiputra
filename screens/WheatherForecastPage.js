@@ -9,7 +9,7 @@ const WeatherForecastPage = ({ visible, setVisible }) => {
     coord: { lat: 26.8467, lon: 80.9462 },
     dt: 1685942598,
     id: 1264733,
-    main: { feels_like: 312.35, humidity: 52, pressure: 1005, temp: 307.2, temp_max: 307.2, temp_min: 307.2 },
+    main: { feels_like: 312.35, humidity: 52, pressure: 1005, temp: 315.2, temp_max: 318.2, temp_min: 310.2 },
     name: 'Lucknow',
     sys: { country: 'IN', id: 9176, sunrise: 1685922135, sunset: 1685971636, type: 1 },
     timezone: 19800,
@@ -49,11 +49,11 @@ const WeatherForecastPage = ({ visible, setVisible }) => {
   };
 
   const dailyForecasts = [
-    { day: 'Monday', temperature: '22°C' },
-    { day: 'Tuesday', temperature: '25°C' },
-    { day: 'Wednesday', temperature: '24°C' },
-    { day: 'Thursday', temperature: '21°C' },
-    { day: 'Friday', temperature: '23°C' }
+    { day: 'Monday', temperature: '32°C' },
+    { day: 'Tuesday', temperature: '35°C' },
+    { day: 'Wednesday', temperature: '44°C' },
+    { day: 'Thursday', temperature: '41°C' },
+    { day: 'Friday', temperature: '43°C' }
   ];
 
   const renderDailyForecastItem = ({ item }) => (
@@ -73,6 +73,7 @@ const WeatherForecastPage = ({ visible, setVisible }) => {
         >
           <View style={styles.contentContainer}>
             <View style={styles.widget}>
+            
               <Image style={styles.widgetImg} source={require('../assets/weatherImages/sun.png')} />
               <View style={styles.temperatureContainer}>
                 <Text style={styles.temperatureTextMin}>{kelvinToCelcius(weatherData.main.temp_min)}°C</Text>
