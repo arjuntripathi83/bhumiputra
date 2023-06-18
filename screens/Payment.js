@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useProductContext } from '../context/ProductContext';
+import RazorpayCheckout from 'react-native-razorpay';
 
 const Payment = () => {
   const navigation = useNavigation();
@@ -33,8 +34,31 @@ const Payment = () => {
           <Text style={styles.totalPrice}>₹ {getCartTotal()}</Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.paymentButton} onPress={handlePayment}>
-        <Text style={styles.paymentButtonText}>Proceed to Payment</Text>
+      <TouchableOpacity style={styles.paymentButton} onPress={()=>{
+        var options = {
+          description: 'Credits towards consultation',
+          image: 'C:\Users\Hp\OneDrive\Desktop\bhumiputra\assets\icons\FarmTradelogo.jpeg',
+          currency: 'INR',
+          key: '<YOUR_KEY_ID>',
+          amount: getCartTotal,
+          name: 'Farm Trade',
+          order_id: 'order_DslnoIgkIDL8Zt',//Replace this with an order_id created using Orders API.
+          prefill: {
+            email: 'arjuntripathi@gmail.com',
+            contact: '7071502006',
+            name: 'Arjun Tripathi'
+          },
+          theme: {color: '#53a20e'}
+        }
+        RazorpayCheckout.open(options).then((data) => {
+          // handle success
+          alert(`Success: ${data.razorpay_payment_id}`);
+        }).catch((error) => {
+          // handle failure
+          alert(`Error: ${error.code} | ${error.description}`);
+        });
+      }}>
+        <Text style={styles.paymentButtonText}>Proceed to Payment{'$' + getCartTotal()}</Text>
       </TouchableOpacity>
     </View>
   );
