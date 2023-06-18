@@ -1,15 +1,12 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, Modal, Image } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Modal, Image, TouchableOpacity } from 'react-native';
 import { IconButton } from 'react-native-paper';
-
+import { MaterialIcons } from '@expo/vector-icons';
 import useProductContext from '../context/ProductContext';
 
 const CartPage = ({ visible, setVisible }) => {
   const { cartItems, getCartTotal, removeItemFromCart } = useProductContext();
 
-  console.log(cartItems);
-
-  // Render each cart item
   const renderCartItem = ({ item }) => {
     return (
       <View style={styles.cartItem}>
@@ -21,41 +18,46 @@ const CartPage = ({ visible, setVisible }) => {
             <Text style={styles.itemPrice}>₹ {item.Price}</Text>
           </View>
           <View style={{ flex: 1 }}>
-            <View style={styles.quantityContainer}>
-              <Text style={styles.quantityText}>Qty: {item.quantity}</Text>
-              <IconButton
-                icon="delete"
-                iconColor="red"
-                size={20}
-                onPress={() => removeItemFromCart(item.id)}
-              />
-            </View>
+            <IconButton
+              icon="delete"
+              iconColor="red"
+              size={20}
+              onPress={() => removeItemFromCart(item.id)}
+            />
           </View>
         </View>
       </View>
     );
   };
 
+  const goBack = () => {
+    setVisible(false); // You can replace this with your desired logic to go back or redirect to the previous page
+  };
+
   return (
     <Modal visible={visible} onRequestClose={() => setVisible(false)} animationType="slide">
       <View style={styles.container}>
+        <TouchableOpacity style={styles.backButton} onPress={goBack}>
+          <MaterialIcons name="arrow-back" size={24} color="black" />
+        </TouchableOpacity>
+
         <Text style={styles.title}>Shopping Cart</Text>
 
-        <FlatList
-          data={cartItems}
-          keyExtractor={(item) => item.id}
-          renderItem={renderCartItem}
-          contentContainerStyle={styles.cartList}
-        />
+        <ScrollView contentContainerStyle={styles.scrollContent}>
+          {cartItems.map((item) => renderCartItem({ item }))}
+        </ScrollView>
 
-        <View style={styles.totalContainer}>
-          <Text style={styles.totalText}>Total:</Text>
-          <Text style={styles.totalPrice}>₹ {getCartTotal()}</Text>
-        </View>
-
-        <View style={styles.buttonContainer}>
+        <View style={styles.priceDetails}>
+          <View style={styles.priceDetailsRow}>
+            <Text style={styles.priceDetailsLabel}>Quantity:</Text>
+            <Text style={styles.priceDetailsValue}>{cartItems.length}</Text>
+          </View>
+          <View style={styles.priceDetailsRow}>
+            <Text style={styles.priceDetailsLabel}>Price:</Text>
+            <Text style={styles.priceDetailsValue}>₹ {getCartTotal()}</Text>
+          </View>
           <TouchableOpacity style={styles.continueButton}>
-            <Text style={styles.buttonText}>Continue</Text>
+            <Text style={styles.continueButtonText}>Continue</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -69,13 +71,19 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#f2f2f2',
   },
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    zIndex: 1,
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
-    fontFamily: 'Arial', // Replace with your desired custom font
+    fontFamily: 'Arial',
   },
-  cartList: {
+  scrollContent: {
     flexGrow: 1,
   },
   cartItem: {
@@ -106,25 +114,38 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
   },
-  totalContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+  priceDetails: {
     marginTop: 20,
     paddingTop: 10,
     borderTopWidth: 1,
     borderTopColor: '#ccc',
-    borderBottomWidth: 1, // Add a bottom border
-    borderBottomColor: '#ccc', // Add a bottom border color
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
   },
-  totalText: {
-    fontSize: 20,
+  priceDetailsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  priceDetailsLabel: {
+    fontSize: 18,
+  },
+  priceDetailsValue: {
+    fontSize: 18,
     fontWeight: 'bold',
   },
-  totalPrice: {
-    fontSize: 20,
+  continueButton: {
+    backgroundColor: 'blue',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    alignSelf: 'flex-end',
+  },
+  continueButtonText: {
+    color: '#fff',
+    fontSize: 18,
     fontWeight: 'bold',
-    color: 'green',
   },
   itemImg: {
     flex: 2,
@@ -132,34 +153,13 @@ const styles = StyleSheet.create({
     height: 70,
     resizeMode: 'contain',
     marginRight: 10,
-    borderRadius: 5, // Add rounded corners
+    borderRadius: 5,
   },
   itemContent: {
     flex: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  quantityContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  quantityText: {
-    marginRight: 10,
-  },
-  buttonContainer: {
-    marginTop: 20,
-    alignItems: 'center',
-  },
-  continueButton: {
-    backgroundColor: 'blue',
-    padding: 10,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
   },
 });
 

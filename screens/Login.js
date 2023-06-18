@@ -42,7 +42,7 @@ const Login = ({ isVisible, setVisible }) => {
       <View style={styles.container}>
         <Image source={require('../assets/icons/leaves.jpg')} style={styles.backgroundImage} />
         <View style={styles.logoContainer}>
-          <Image source={require('../assets/icons/seeds.png')} style={styles.logo} />
+          <Image source={require('../assets/icons/Applogo.png')} style={styles.logo} />
         </View>
         <Text style={[styles.formTitle, { color: 'white' }]}>Welcome Back</Text>
         <Card style={styles.card}>
@@ -102,11 +102,11 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   logoContainer: {
-    marginBottom: 20,
+    marginBottom: 10,
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
     resizeMode: 'contain',
   },
   formTitle: {

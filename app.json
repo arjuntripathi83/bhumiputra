@@ -4,7 +4,7 @@
     "slug": "bhumiputra",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "../assets/icons/FarmTradelogo.png",
     "userInterfaceStyle": "light",
    
     "splash": {
@@ -20,7 +20,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "../assets/icons/FarmTradelogo.png",
         "backgroundColor": "#ffffff"
       }
     },
