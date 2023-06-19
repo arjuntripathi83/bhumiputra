@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginVertical: 20
+    marginVertical: 40
   },
   category: {
     width: '20%',
