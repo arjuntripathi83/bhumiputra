@@ -74,7 +74,7 @@ export default function App() {
                 options={{
                   headerRight: (props) => (
                     <TouchableOpacity onPress={e => setLoginOpen(true)}>
-                      <Image style={{width: 50, height: 50}} source={{uri: 'https://cdn-icons-png.flaticon.com/256/3135/3135715.png'}} />
+                      <Image style={{width: 40, height: 40}} source={{uri: 'https://cdn-icons-png.flaticon.com/256/3135/3135715.png'}} />
                     </TouchableOpacity>
                   )
                 }}
