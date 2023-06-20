@@ -37,7 +37,7 @@ const Payment = () => {
       <TouchableOpacity style={styles.paymentButton} onPress={()=>{
         var options = {
           description: 'Credits towards consultation',
-          image: 'C:\Users\Hp\OneDrive\Desktop\bhumiputra\assets\icons\FarmTradelogo.jpeg',
+          image: '../assets/Logo.png',
           currency: 'INR',
           key: '<YOUR_KEY_ID>',
           amount: getCartTotal,
