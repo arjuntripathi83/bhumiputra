@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Modal, Image } from 'react-native';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import app from '../firebaseConfig';
 
-const RentalEquipmentPage = ({visible, setVisible}) => {
+const RentalEquipmentPage = ({ visible, setVisible }) => {
   const [equipmentList, setEquipmentList] = useState([]);
 
   useEffect(() => {
     fetchEquipmentData();
-  }, [])
-  
+  }, []);
 
   const fetchEquipmentData = () => {
-    // setLoading(true);
     const db = getFirestore(app);
-    const ref = collection(db, "Equipments");
+    const ref = collection(db, 'Equipments');
     getDocs(ref).then((snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -24,8 +22,6 @@ const RentalEquipmentPage = ({visible, setVisible}) => {
       }));
       console.log(data);
       setEquipmentList(data);
-      // setMasterList(data);
-      // setLoading(false);
     });
   };
 
@@ -37,20 +33,22 @@ const RentalEquipmentPage = ({visible, setVisible}) => {
   );
 
   const checkAvailability = (equipment) => {
-    // Implement your logic to check availability and navigate to equipment details page
     console.log(`Checking availability for ${equipment.name}`);
   };
 
+  const goBack = () => {
+    setVisible(false);
+  };
+
   return (
-    <Modal visible={visible} onRequestClose={() => setVisible(false)} animationType="slide">
-    <View style={styles.container}>
-      <Text style={styles.title}>Rental Equipment</Text>
-      <FlatList
-        data={equipmentList}
-        renderItem={renderEquipmentItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
-    </View>
+    <Modal visible={visible} onRequestClose={goBack} animationType="slide">
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.backButton} onPress={goBack}>
+          <Image style={styles.backButtonImage} source={require('../assets/icons/left-arrow.png')} />
+        </TouchableOpacity>
+        <Text style={styles.title}>Rental Equipment</Text>
+        <FlatList data={equipmentList} renderItem={renderEquipmentItem} keyExtractor={(item) => item.id.toString()} />
+      </View>
     </Modal>
   );
 };
@@ -75,6 +73,17 @@ const styles = StyleSheet.create({
   itemAvailability: {
     fontSize: 16,
     color: 'gray',
+  },
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    zIndex: 1,
+    padding: 10,
+  },
+  backButtonImage: {
+    width: 24,
+    height: 24,
   },
 });
 

@@ -4,7 +4,7 @@
     "slug": "FarmTrade",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "../assets/icons/FarmTradelogo.jpeg",
+    "icon": "./assets/Logo.png",
     "userInterfaceStyle": "light",
    
     "splash": {
@@ -20,7 +20,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "../assets/icons/FarmTradelogo.jpeg",
+        "foregroundImage": "./assets/Logo.png",
         "backgroundColor": "#ffffff"
       }
     },

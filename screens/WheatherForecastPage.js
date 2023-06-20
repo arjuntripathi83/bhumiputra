@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, FlatList, Modal, Image } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, FlatList, Modal, Image, TouchableOpacity } from 'react-native';
 
 const WeatherForecastPage = ({ visible, setVisible }) => {
   const [weatherData, setWeatherData] = useState({
@@ -63,17 +63,25 @@ const WeatherForecastPage = ({ visible, setVisible }) => {
     </View>
   );
 
+  const goBack = () => {
+    setVisible(false);
+  };
+
   return (
     <Modal visible={visible} onRequestClose={() => setVisible(false)} animationType="fade">
       <View style={styles.container}>
         <ImageBackground
-          source={require('../assets/images/weather-bg.webp')} // Replace with your background image
+          source={require('../assets/images/weather-bg.webp')} // Replace
+
+ with your background image
           style={styles.backgroundImage}
           resizeMode="cover"
         >
+          <TouchableOpacity style={styles.backButton} onPress={goBack}>
+            <Image style={styles.backButtonImage} source={require('../assets/icons/left-arrow.png')} />
+          </TouchableOpacity>
           <View style={styles.contentContainer}>
             <View style={styles.widget}>
-            
               <Image style={styles.widgetImg} source={require('../assets/weatherImages/sun.png')} />
               <View style={styles.temperatureContainer}>
                 <Text style={styles.temperatureTextMin}>{kelvinToCelcius(weatherData.main.temp_min)}°C</Text>
@@ -173,7 +181,9 @@ const styles = StyleSheet.create({
   },
   widgetImg: {
     width: 150,
-    height: 150
+   
+
+ height: 150
   },
   temperatureContainer: {
     flexDirection: 'row',
@@ -200,6 +210,17 @@ const styles = StyleSheet.create({
   },
   forecast: {
     flex: 3
+  },
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    zIndex: 1,
+    padding: 10
+  },
+  backButtonImage: {
+    width: 24,
+    height: 24
   }
 });
 

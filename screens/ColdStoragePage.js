@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import * as Location from 'expo-location';
 
 const API_KEY = 'YOUR_API_KEY';
 
 const ColdStoragePage = () => {
+  const navigation = useNavigation();
   const [location, setLocation] = useState(null);
   const [coldStorages, setColdStorages] = useState([]);
 
@@ -64,6 +66,8 @@ const ColdStoragePage = () => {
 
   const handleAvailability = (coldStorage) => {
     console.log(`Checking availability for ${coldStorage.name}`);
+    // Perform any navigation-related actions here
+    navigation.navigate('AvailabilityPage', { coldStorage });
   };
 
   return (
