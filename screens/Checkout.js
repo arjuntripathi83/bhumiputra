@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { IconButton } from 'react-native-paper';
+import RazorpayCheckout from 'react-native-razorpay';
 
 const Checkout = () => {
   const [products, setProducts] = useState([
@@ -71,6 +72,32 @@ const Checkout = () => {
       </TouchableOpacity>
       <TouchableOpacity style={styles.proceedButton} onPress={proceedToPayment}>
         <Text style={styles.proceedButtonText}>Proceed to Payment</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.paymentButton} onPress={()=>{
+        var options = {
+          description: 'Credits towards consultation',
+          image: '../assets/Logo.png',
+          currency: 'INR',
+          key: '<YOUR_KEY_ID>',
+          amount: getCartTotal,
+          name: 'Farm Trade',
+          order_id: 'order_DslnoIgkIDL8Zt',//Replace this with an order_id created using Orders API.
+          prefill: {
+            email: 'arjuntripathi@gmail.com',
+            contact: '7071502006',
+            name: 'Arjun Tripathi'
+          },
+          theme: {color: '#53a20e'}
+        }
+        RazorpayCheckout.open(options).then((data) => {
+          // handle success
+          alert(`Success: ${data.razorpay_payment_id}`);
+        }).catch((error) => {
+          // handle failure
+          alert(`Error: ${error.code} | ${error.description}`);
+        });
+      }}>
+        <Text style={styles.paymentButtonText}>Proceed to Payment{'$' + getCartTotal()}</Text>
       </TouchableOpacity>
     </View>
   );
