@@ -4,7 +4,7 @@ import { Card, TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 
-const Signup = ({ isVisible, setVisible }) => {
+const Signup = ({ isVisible, setVisible, setLoginOpen }) => {
   const signupData = {
     email: '',
     password: '',
@@ -30,8 +30,8 @@ const Signup = ({ isVisible, setVisible }) => {
   };
 
   const goToLogin = () => {
-    // Navigation logic to the login screen
-    console.log('Navigating to Login');
+    setVisible(false);
+    setLoginOpen(true);
   };
 
   return (

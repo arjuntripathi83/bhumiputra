@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { Modal } from 'react-native';
 import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import RazorpayCheckout from 'react-native-razorpay';
 
-const Checkout = () => {
+const Checkout = ({ visible, setVisible }) => {
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -59,6 +60,7 @@ const Checkout = () => {
   };
 
   return (
+    <Modal visible={visible} onRequestClose={() => setVisible(false)} animationType="slide">
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         {products.map(renderProductItem)}
@@ -79,7 +81,7 @@ const Checkout = () => {
           image: '../assets/Logo.png',
           currency: 'INR',
           key: '<YOUR_KEY_ID>',
-          amount: getCartTotal,
+          amount: 2000,
           name: 'Farm Trade',
           order_id: 'order_DslnoIgkIDL8Zt',//Replace this with an order_id created using Orders API.
           prefill: {
@@ -97,9 +99,10 @@ const Checkout = () => {
           alert(`Error: ${error.code} | ${error.description}`);
         });
       }}>
-        <Text style={styles.paymentButtonText}>Proceed to Payment{'$' + getCartTotal()}</Text>
+        <Text style={styles.paymentButtonText}>Proceed to Payment{'₹' + 2000}</Text>
       </TouchableOpacity>
     </View>
+    </Modal>
   );
 };
 

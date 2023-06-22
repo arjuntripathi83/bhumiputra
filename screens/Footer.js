@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Footer = () => {
+const Footer = ({profileOpen, setProfileOpen}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.linkContainer}>
@@ -15,7 +15,7 @@ const Footer = () => {
         <Text style={styles.linkText}>Search</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.linkContainer}>
+      <TouchableOpacity style={styles.linkContainer} onPress={() => {setProfileOpen(true)}}>
         <Icon name="user" size={24} color="#333" />
         <Text style={styles.linkText}>Profile</Text>
       </TouchableOpacity>

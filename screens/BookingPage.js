@@ -43,7 +43,7 @@ const ProductCard = ({ title, brand, price, image }) => (
   </View>
 );
 
-const App = () => {
+const BookingPage = () => {
   const [showPayment, setShowPayment] = useState(false);
 
   return (

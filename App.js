@@ -19,6 +19,9 @@ import FertilizersBrowser from './screens/FertilizerBrowser';
 import RentalEquipmentPage from './screens/RentalEquipmentPage';
 import ColdStoragePage from './screens/ColdStoragePage';
 import Login from './screens/Login';
+import Signup from './screens/Signup';
+import BadgeIconButton from './screens/BadgeIconButton';
+import Checkout from './screens/Checkout';
 
 export default function App() {
   const Tab = createBottomTabNavigator();
@@ -27,21 +30,26 @@ export default function App() {
 
   const [LoginOpen, setLoginOpen] = useState(false);
 
+  const [signupOpen, setSignupOpen] = useState(false);
+
   const [cartOpen, setCartOpen] = useState(false);
 
-  const {userData, setUserData} = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+
+  const { userData, setUserData } = useState(false);
 
   return (
     <ProductProvider>
       <SafeAreaView style={{ flex: 1 }}>
         <Profile visible={profileOpen} setVisible={setProfileOpen} />
-        <CartPage visible={cartOpen} setVisible={setCartOpen} />
-        
+        <CartPage visible={cartOpen} setVisible={setCartOpen} setCheckoutOpen={setCheckoutOpen} />
+        <Checkout visible={checkoutOpen} setVisible={setCheckoutOpen} />
 
         <UserProvider>
           <NavigationContainer>
-            {LoginOpen && <Login visible={LoginOpen} setVisible={setLoginOpen} />}
-        
+            {LoginOpen && <Login visible={LoginOpen} setVisible={setLoginOpen} setSignupOpen={setSignupOpen} />}
+            {signupOpen && <Signup visible={signupOpen} setVisible={setSignupOpen} setLoginOpen={setLoginOpen} />}
+
             <Tab.Navigator
               screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, size }) => {
@@ -73,36 +81,121 @@ export default function App() {
                 name="Home"
                 options={{
                   headerRight: (props) => (
-                    <TouchableOpacity onPress={e => setLoginOpen(true)}>
-                      <Image style={{width: 40, height: 40}} source={{uri: 'https://cdn-icons-png.flaticon.com/256/3135/3135715.png'}} />
+                    <TouchableOpacity onPress={(e) => setLoginOpen(true)}>
+                      <Image style={{ width: 40, height: 40 }} source={{ uri: 'https://cdn-icons-png.flaticon.com/256/3135/3135715.png' }} />
                     </TouchableOpacity>
                   )
                 }}
-                children={(props) => <Home />}
+                children={(props) => <Home profileOpen={profileOpen} setProfileOpen={setProfileOpen} />}
               />
               <Tab.Screen
                 name="EquipmentBrowser"
                 children={() => <Equipmentsbrowser setCartOpen={setCartOpen} />}
                 options={{
                   headerRight: (props) => (
-                    <TouchableOpacity onPress={(e) => setProfileOpen(true)}>
-                      <Image
-                        on
-                        style={{
-                          height: 40,
-                          width: 40,
-                          borderRadius: 20,
-                          marginRight: 10
+                    <View style={{flexDirection: 'row'}}>
+                      <BadgeIconButton
+                        icon="cart"
+                        badgeContent={0}
+                        size={20}
+                        onPress={() => {
+                          setCartOpen(true);
                         }}
-                        source={{ uri: 'https://creazilla-store.fra1.digitaloceanspaces.com/icons/7911322/avatar-icon-sm.png' }}
                       />
-                    </TouchableOpacity>
+                      <TouchableOpacity onPress={(e) => setProfileOpen(true)}>
+                        <Image
+                          on
+                          style={{
+                            height: 40,
+                            width: 40,
+                            borderRadius: 20,
+                            marginRight: 10
+                          }}
+                          source={{ uri: 'https://creazilla-store.fra1.digitaloceanspaces.com/icons/7911322/avatar-icon-sm.png' }}
+                        />
+                      </TouchableOpacity>
+                    </View>
                   )
                 }}
               />
-              <Tab.Screen name="FertilizerBrowser" children={() => <FertilizersBrowser />} />
-              <Tab.Screen name="Seedsbrowser" children={() => <Seedsbrowser />} />
-              <Tab.Screen name="ColdStorage" children={() => <ColdStoragePage />} />
+              <Tab.Screen name="FertilizerBrowser" children={() => <FertilizersBrowser />} options={{
+                  headerRight: (props) => (
+                    <View style={{flexDirection: 'row'}}>
+                      <BadgeIconButton
+                        icon="cart"
+                        badgeContent={0}
+                        size={20}
+                        onPress={() => {
+                          setCartOpen(true);
+                        }}
+                      />
+                      <TouchableOpacity onPress={(e) => setProfileOpen(true)}>
+                        <Image
+                          on
+                          style={{
+                            height: 40,
+                            width: 40,
+                            borderRadius: 20,
+                            marginRight: 10
+                          }}
+                          source={{ uri: 'https://creazilla-store.fra1.digitaloceanspaces.com/icons/7911322/avatar-icon-sm.png' }}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  )
+                }} />
+              <Tab.Screen name="Seedsbrowser" children={() => <Seedsbrowser />} options={{
+                  headerRight: (props) => (
+                    <View style={{flexDirection: 'row'}}>
+                      <BadgeIconButton
+                        icon="cart"
+                        badgeContent={0}
+                        size={20}
+                        onPress={() => {
+                          setCartOpen(true);
+                        }}
+                      />
+                      <TouchableOpacity onPress={(e) => setProfileOpen(true)}>
+                        <Image
+                          on
+                          style={{
+                            height: 40,
+                            width: 40,
+                            borderRadius: 20,
+                            marginRight: 10
+                          }}
+                          source={{ uri: 'https://creazilla-store.fra1.digitaloceanspaces.com/icons/7911322/avatar-icon-sm.png' }}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  )
+                }} />
+              <Tab.Screen name="ColdStorage" children={() => <ColdStoragePage />} options={{
+                  headerRight: (props) => (
+                    <View style={{flexDirection: 'row'}}>
+                      <BadgeIconButton
+                        icon="cart"
+                        badgeContent={0}
+                        size={20}
+                        onPress={() => {
+                          setCartOpen(true);
+                        }}
+                      />
+                      <TouchableOpacity onPress={(e) => setProfileOpen(true)}>
+                        <Image
+                          on
+                          style={{
+                            height: 40,
+                            width: 40,
+                            borderRadius: 20,
+                            marginRight: 10
+                          }}
+                          source={{ uri: 'https://creazilla-store.fra1.digitaloceanspaces.com/icons/7911322/avatar-icon-sm.png' }}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  )
+                }} />
             </Tab.Navigator>
           </NavigationContainer>
         </UserProvider>

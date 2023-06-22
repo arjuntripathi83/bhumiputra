@@ -17,6 +17,7 @@ export const ProductProvider = ({children}) => {
     
 
     const addItemToCart = (item) => {
+
         const exist = cartItems.find((cartItem) => cartItem.id === item.id);
         if (exist) {
             setCartItems(
@@ -52,6 +53,7 @@ export const ProductProvider = ({children}) => {
             setCartItems(cartItems.filter((cartItem) => cartItem.id !== item.id));
             // localStorage.setItem('cartItems', JSON.stringify(cartItems));
         } else {
+            // console.log(exist);
             setCartItems(
                 cartItems.map((cartItem) =>
                     cartItem.id === item.id ? { ...exist, quantity: exist.quantity - 1 } : cartItem

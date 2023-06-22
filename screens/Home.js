@@ -26,7 +26,7 @@ const BlockCard = ({ imgPath, text }) => {
   );
 };
 
-const Home = () => {
+const Home = ({profileOpen, setProfileOpen}) => {
   const [searchText, setSearchText] = useState('');
   const [isListening, setIsListening] = useState(false);
   const [rentalOpen, setRentalOpen] = useState(false);
@@ -109,9 +109,9 @@ const Home = () => {
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/real-estate.png')} />
           <Text style={styles.categoryText}>Rental</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.category} onPress={() => navigation.navigate('ColdStoragePage')}>
+        <TouchableOpacity style={styles.category} onPress={() => navigation.navigate('ColdStorage')}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/coldstorage.png')} />
-          <Text style={styles.categoryText}>Cold storages'</Text>
+          <Text style={styles.categoryText}>Cold storages</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.category} onPress={(e) => setWeatherOpen(true)}>
           <Image resizeMode="contain" style={styles.categoryIcon} source={require('../assets/icons/weather.png')} />
@@ -129,7 +129,7 @@ const Home = () => {
       <TouchableOpacity onPress={() => navigation.navigate('FertilizerBrowser')}>
         <BlockCard imgPath={require('../assets/images/fertilizers.jpg')} text={'Fertilizers'} />
       </TouchableOpacity>
-      <Footer />
+      <Footer profileOpen={profileOpen} setProfileOpen={setProfileOpen} />
     </ScrollView>
   );
 };

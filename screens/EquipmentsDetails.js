@@ -66,7 +66,7 @@ const EquipmentsDetails = ({ equipmentData, visible, setVisible, setCartOpen }) 
           mode="contained"
           // style={styles.addToCartButton}
           onPress={() => {
-            addItemToCart(equipmentData.obj);
+            addItemToCart({...equipmentData.obj, id: equipmentData.id});
             // setVisible(false);
           }}
         >

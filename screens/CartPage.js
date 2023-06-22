@@ -3,10 +3,11 @@ import { View, Text, ScrollView, StyleSheet, Modal, Image, TouchableOpacity } fr
 import { IconButton } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
 import useProductContext from '../context/ProductContext';
+import RazorpayCheckout from 'react-native-razorpay';
 
-const CartPage = ({ visible, setVisible }) => {
-  const { cartItems, getCartTotal, removeItemFromCart } = useProductContext();
-
+const CartPage = ({ visible, setVisible, setCheckoutOpen }) => {
+  const { cartItems, getCartTotal, getCartItemsCount, removeItemFromCart } = useProductContext();
+  // console.log(cartItems);
   const renderCartItem = ({ item }) => {
     return (
       <View style={styles.cartItem}>
@@ -18,11 +19,12 @@ const CartPage = ({ visible, setVisible }) => {
             <Text style={styles.itemPrice}>₹ {item.Price}</Text>
           </View>
           <View style={{ flex: 1 }}>
+            <Text>Qty : {item.quantity}</Text>
             <IconButton
               icon="delete"
               iconColor="red"
               size={20}
-              onPress={() => removeItemFromCart(item.id)}
+              onPress={() => removeItemFromCart(item)}
             />
           </View>
         </View>
@@ -37,6 +39,7 @@ const CartPage = ({ visible, setVisible }) => {
   return (
     <Modal visible={visible} onRequestClose={() => setVisible(false)} animationType="slide">
       <View style={styles.container}>
+        
         <TouchableOpacity style={styles.backButton} onPress={goBack}>
           <MaterialIcons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
@@ -49,16 +52,39 @@ const CartPage = ({ visible, setVisible }) => {
 
         <View style={styles.priceDetails}>
           <View style={styles.priceDetailsRow}>
-            <Text style={styles.priceDetailsLabel}>Quantity:</Text>
-            <Text style={styles.priceDetailsValue}>{cartItems.length}</Text>
+            <Text style={styles.priceDetailsLabel}>Total Items:</Text>
+            <Text style={styles.priceDetailsValue}>{getCartItemsCount()}</Text>
           </View>
           <View style={styles.priceDetailsRow}>
             <Text style={styles.priceDetailsLabel}>Price:</Text>
             <Text style={styles.priceDetailsValue}>₹ {getCartTotal()}</Text>
           </View>
-          <TouchableOpacity style={styles.continueButton}>
-            <Text style={styles.continueButtonText}>Continue</Text>
-          </TouchableOpacity>
+          <TouchableOpacity style={styles.paymentButton} onPress={()=>{
+        var options = {
+          description: 'Credits towards consultation',
+          image: '../assets/Logo.png',
+          currency: 'INR',
+          key: '<YOUR_KEY_ID>',
+          amount: getCartTotal(),
+          name: 'Farm Trade',
+          order_id: 'order_DslnoIgkIDL8Zt',
+          prefill: {
+            email: 'arjuntripathi@gmail.com',
+            contact: '7071502006',
+            name: 'Arjun Tripathi'
+          },
+          theme: {color: '#53a20e'}
+        }
+        RazorpayCheckout.open(options).then((data) => {
+          // handle success
+          alert(`Success: ${data.razorpay_payment_id}`);
+        }).catch((error) => {
+          // handle failure
+          alert(`Error: ${error.code} | ${error.description}`);
+        });
+      }}>
+        <Text style={styles.paymentButtonText}>Proceed to Payment{'₹' + getCartTotal()}</Text>
+      </TouchableOpacity>
         </View>
       </View>
     </Modal>
@@ -73,7 +99,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: 'absolute',
-    top: 20,
+    top: 23,
     left: 20,
     zIndex: 1,
   },
@@ -82,6 +108,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     fontFamily: 'Arial',
+    marginLeft: 40,
   },
   scrollContent: {
     flexGrow: 1,
@@ -160,6 +187,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  proceedButton: {
+    backgroundColor: 'blue',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  proceedButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
