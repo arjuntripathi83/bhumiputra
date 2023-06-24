@@ -22,6 +22,7 @@ import Login from './screens/Login';
 import Signup from './screens/Signup';
 import BadgeIconButton from './screens/BadgeIconButton';
 import Checkout from './screens/Checkout';
+import Cash from './screens/Cash';
 
 export default function App() {
   const Tab = createBottomTabNavigator();
@@ -36,6 +37,7 @@ export default function App() {
 
   const [checkoutOpen, setCheckoutOpen] = useState(false);
 
+
   const { userData, setUserData } = useState(false);
 
   return (
@@ -43,10 +45,11 @@ export default function App() {
       <SafeAreaView style={{ flex: 1 }}>
         <Profile visible={profileOpen} setVisible={setProfileOpen} />
         <CartPage visible={cartOpen} setVisible={setCartOpen} setCheckoutOpen={setCheckoutOpen} />
-        <Checkout visible={checkoutOpen} setVisible={setCheckoutOpen} />
+        {/* <Checkout visible={checkoutOpen} setVisible={setCheckoutOpen} /> */}
 
         <UserProvider>
           <NavigationContainer>
+        <Cash visible={checkoutOpen} setVisible={setCheckoutOpen} setCartOpen={setCartOpen} />
             {LoginOpen && <Login visible={LoginOpen} setVisible={setLoginOpen} setSignupOpen={setSignupOpen} />}
             {signupOpen && <Signup visible={signupOpen} setVisible={setSignupOpen} setLoginOpen={setLoginOpen} />}
 
@@ -118,7 +121,7 @@ export default function App() {
                   )
                 }}
               />
-              <Tab.Screen name="FertilizerBrowser" children={() => <FertilizersBrowser />} options={{
+              <Tab.Screen name="FertilizerBrowser" children={() => <FertilizersBrowser setCartOpen={setCartOpen} />} options={{
                   headerRight: (props) => (
                     <View style={{flexDirection: 'row'}}>
                       <BadgeIconButton
@@ -144,7 +147,7 @@ export default function App() {
                     </View>
                   )
                 }} />
-              <Tab.Screen name="Seedsbrowser" children={() => <Seedsbrowser />} options={{
+              <Tab.Screen name="Seedsbrowser" children={() => <Seedsbrowser setCartOpen={setCartOpen} />} options={{
                   headerRight: (props) => (
                     <View style={{flexDirection: 'row'}}>
                       <BadgeIconButton
@@ -170,7 +173,7 @@ export default function App() {
                     </View>
                   )
                 }} />
-              <Tab.Screen name="ColdStorage" children={() => <ColdStoragePage />} options={{
+              <Tab.Screen name="ColdStorage" children={() => <ColdStoragePage setCartOpen={setCartOpen} />} options={{
                   headerRight: (props) => (
                     <View style={{flexDirection: 'row'}}>
                       <BadgeIconButton

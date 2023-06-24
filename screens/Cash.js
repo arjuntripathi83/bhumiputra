@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, Modal, Image, TouchableOpacity } from 'react-native';
-import { Button, IconButton } from 'react-native-paper';
+import { Button, IconButton, TextInput } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
 import useProductContext from '../context/ProductContext';
 import RazorpayCheckout from 'react-native-razorpay';
 import * as Linking from 'expo-linking';
+import { useNavigation } from '@react-navigation/native';
 
-const CartPage = ({ visible, setVisible, setCheckoutOpen }) => {
+const Cash = ({ visible, setVisible, setCartOpen }) => {
   const { cartItems, getCartTotal, getCartItemsCount, removeItemFromCart } = useProductContext();
+  const [showThankyou, setShowThankyou] = useState(false);
+  const navigation = useNavigation();
   // console.log(cartItems);
   const renderCartItem = ({ item }) => {
     return (
@@ -21,12 +24,7 @@ const CartPage = ({ visible, setVisible, setCheckoutOpen }) => {
           </View>
           <View style={{ flex: 1 }}>
             <Text>Qty : {item.quantity}</Text>
-            <IconButton
-              icon="delete"
-              iconColor="red"
-              size={20}
-              onPress={() => removeItemFromCart(item)}
-            />
+            <IconButton icon="delete" iconColor="red" size={20} onPress={() => removeItemFromCart(item)} />
           </View>
         </View>
       </View>
@@ -40,57 +38,63 @@ const CartPage = ({ visible, setVisible, setCheckoutOpen }) => {
   return (
     <Modal visible={visible} onRequestClose={() => setVisible(false)} animationType="slide">
       <View style={styles.container}>
-        
         <TouchableOpacity style={styles.backButton} onPress={goBack}>
           <MaterialIcons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
 
-        <Text style={styles.title}>Shopping Cart</Text>
+        <Text style={styles.title}>Checkout</Text>
 
-        <ScrollView contentContainerStyle={styles.scrollContent}>
-          {cartItems.map((item) => renderCartItem({ item }))}
-        </ScrollView>
+        {!showThankyou ? (
+          <View>
+            <Text style={{ marginTop: 20 }}>Your Address</Text>
+            <TextInput multiline numberOfLines={8} placeholder="Enter Your Address Here..." />
 
-        <View style={styles.priceDetails}>
-          <View style={styles.priceDetailsRow}>
-            <Text style={styles.priceDetailsLabel}>Total Items:</Text>
-            <Text style={styles.priceDetailsValue}>{getCartItemsCount()}</Text>
+            <Text style={{ marginTop: 20 }}>Pincode</Text>
+            <TextInput keyboardType="number-pad" placeholder="Enter Pincode..." />
+
+            <Text style={{ marginTop: 20 }}>Mobile No.</Text>
+            <TextInput keyboardType="numeric" placeholder="Enter Your Mobile No." />
+
+            <Button
+              style={{ marginTop: 30 }}
+              mode="contained"
+              onPress={() => {
+                setShowThankyou(true);
+              }}
+            >
+              Place Order
+            </Button>
           </View>
-          <View style={styles.priceDetailsRow}>
-            <Text style={styles.priceDetailsLabel}>Price:</Text>
-            <Text style={styles.priceDetailsValue}>₹ {getCartTotal()}</Text>
+        ) : (
+          <View>
+            <Image
+              style={{ marginHorizontal: 50, height: 200, marginTop: 30 }}
+              resizeMode="contain"
+              source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Sign-check-icon.png/600px-Sign-check-icon.png' }}
+            />
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 30,
+                fontWeight: 'bold',
+                marginTop: 20
+              }}
+            >
+              Thankyou for your Order!
+            </Text>
+            <Button
+              style={{ marginTop: 30 }}
+              mode="contained"
+              onPress={() => {
+                setCartOpen(false);
+                setVisible(false);
+                navigation.navigate('Home');
+              }}
+            >
+              Go Back to Homepage
+            </Button>
           </View>
-          {/* <Button onPress={() => {
-            Linking.openURL('https://buy.stripe.com/test_8wM2c6fvm20g0Qo7st');
-          }}>Pay</Button> */}
-          {/* <TouchableOpacity style={styles.paymentButton} onPress={()=>{
-        var options = {
-          description: 'Credits towards consultation',
-          image: '../assets/Logo.png',
-          currency: 'INR',
-          key: '<YOUR_KEY_ID>',
-          amount: getCartTotal(),
-          name: 'Farm Trade',
-          order_id: 'order_DslnoIgkIDL8Zt',
-          prefill: {
-            email: 'arjuntripathi@gmail.com',
-            contact: '7071502006',
-            name: 'Arjun Tripathi'
-          },
-          theme: {color: '#53a20e'}
-        }
-        RazorpayCheckout.open(options).then((data) => {
-          // handle success
-          alert(`Success: ${data.razorpay_payment_id}`);
-        }).catch((error) => {
-          // handle failure
-          alert(`Error: ${error.code} | ${error.description}`);
-        });
-      }}>
-        <Text style={styles.paymentButtonText}>Cash On Delivery{'₹' + getCartTotal()}</Text>
-      </TouchableOpacity> */}
-      <Button onPress={() => {setCheckoutOpen(true)}} mode='contained'>Cash On Delivery</Button>
-        </View>
+        )}
       </View>
     </Modal>
   );
@@ -100,23 +104,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#f2f2f2'
   },
   backButton: {
     position: 'absolute',
     top: 23,
     left: 20,
-    zIndex: 1,
+    zIndex: 1
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
     fontFamily: 'Arial',
-    marginLeft: 40,
+    marginLeft: 40
   },
   scrollContent: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   cartItem: {
     flexDirection: 'row',
@@ -129,22 +133,22 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowOpacity: 0.2,
     shadowRadius: 2,
-    elevation: 2,
+    elevation: 2
   },
   itemBrand: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   itemName: {
-    fontSize: 20,
+    fontSize: 20
   },
   itemPrice: {
     fontSize: 25,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   priceDetails: {
     marginTop: 20,
@@ -152,32 +156,32 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: '#ccc',
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: '#ccc'
   },
   priceDetailsRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 10
   },
   priceDetailsLabel: {
-    fontSize: 18,
+    fontSize: 18
   },
   priceDetailsValue: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   continueButton: {
     backgroundColor: 'blue',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
-    alignSelf: 'flex-end',
+    alignSelf: 'flex-end'
   },
   continueButtonText: {
     color: '#fff',
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   itemImg: {
     flex: 2,
@@ -185,26 +189,26 @@ const styles = StyleSheet.create({
     height: 70,
     resizeMode: 'contain',
     marginRight: 10,
-    borderRadius: 5,
+    borderRadius: 5
   },
   itemContent: {
     flex: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   proceedButton: {
     backgroundColor: 'blue',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   proceedButtonText: {
     color: '#fff',
     fontSize: 18,
-    fontWeight: 'bold',
-  },
+    fontWeight: 'bold'
+  }
 });
 
-export default CartPage;
+export default Cash;

@@ -4,6 +4,7 @@ import { Button, IconButton } from 'react-native-paper';
 import { Rating } from 'react-native-ratings';
 import useProductContext from '../context/ProductContext';
 import BadgeIconButton from './BadgeIconButton';
+import * as Linking from 'expo-linking';
 
 const EquipmentsDetails = ({ equipmentData, visible, setVisible, setCartOpen }) => {
   const ratingCompleted = (rating) => {
@@ -71,6 +72,28 @@ const EquipmentsDetails = ({ equipmentData, visible, setVisible, setCartOpen }) 
           }}
         >
           <Text style={styles.addToCartButtonText}>Add to Cart</Text>
+        </Button>
+        <Button
+        style={{ marginTop: 10 }}
+          mode="contained"
+          // style={styles.addToCartButton}
+          onPress={() => {
+            if(equipmentData.id === '0nchZblzSnT5TJmKeOTG'){
+              Linking.openURL('https://buy.stripe.com/test_3cscQKbf620g2Yw146');
+            }else if(equipmentData.id === '2kyvQwU6hvsg1j9uVdM0') {
+              Linking.openURL('https://buy.stripe.com/test_fZe8Au3MEeN20Qo147');
+            }else if(equipmentData.id === 'LOWbb64l5KlyLiby7KAi') {
+              Linking.openURL('https://buy.stripe.com/test_dR6182fvm7kA6aI5ko');
+            }else if(equipmentData.id === 'R1wOEEmIt1NeKVBZEyh7') {
+              Linking.openURL('https://buy.stripe.com/test_aEUg2Wbf634k2YwaEJ');
+            }else if(equipmentData.id === 'SXZqR9BFdZw4SqrVanLS') {
+              Linking.openURL('https://buy.stripe.com/test_28odUO1EwawMeHe5kq');
+            }else{
+              Linking.openURL('https://buy.stripe.com/test_3cscQKbf620g2Yw146');
+            }
+          }}
+        >
+          <Text style={styles.addToCartButtonText}>Buy Now</Text>
         </Button>
       </View>
     </Modal>
